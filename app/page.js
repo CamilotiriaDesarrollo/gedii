@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import DashboardInvestigaciones from "./components/dashboard";
 
 const NAV_ROUTES = { "Inicio":"/", "Investigar":"/investigar" };
 
@@ -17,6 +18,16 @@ const IMGS = {
 };
 
 const NAV = ["Inicio","Investigar","Repositorio","Conocimiento","Caja de herramientas","Observatorios","Ayuda"];
+const SIDEBAR_ITEMS = [
+  { key:"home",         label:"HOME",                                    route:"/"            },
+  { key:"investigar",   label:"Registra tu investigación",               route:"/investigar"  },
+  { key:"arquitectura", label:"Arquitectura metodológica"                                     },
+  { key:"datos",        label:"Modelo de gestión de datos"                                    },
+  { key:"divulgacion",  label:"Divulgación, circulación y apropiación"                        },
+  { key:"herramientas", label:"Caja de herramientas"                                          },
+  { key:"etica",        label:"Marco ético"                                                   },
+  { key:"actores",      label:"Caracterización de actores"                                    },
+];
 const STATS = [
   { value:"486",   label:"Investigaciones" },
   { value:"1,240", label:"Documentos" },
@@ -226,6 +237,20 @@ function DecorIcon() {
   );
 }
 
+/* ── Sidebar icon ───────────────────────────────────────────────── */
+function SidebarIcon({ type, active }) {
+  const c = active ? "#1A0A3D" : "#7B68AE";
+  const p = { width:20, height:20, viewBox:"0 0 24 24", fill:"none", stroke:c, strokeWidth:"1.8", strokeLinecap:"round", strokeLinejoin:"round" };
+  if (type === "home")     return (<svg {...p}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>);
+  if (type === "register") return (<svg {...p}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>);
+  if (type === "arch")     return (<svg {...p}><circle cx="9" cy="5" r="2"/><circle cx="15" cy="19" r="2"/><circle cx="3" cy="19" r="2"/><path d="M9 7v8M9 15l-4-2M9 15l4-2"/></svg>);
+  if (type === "data")     return (<svg {...p}><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>);
+  if (type === "broadcast") return (<svg {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>);
+  if (type === "tools")    return (<svg {...p}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>);
+  if (type === "ethics")   return (<svg {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>);
+  if (type === "actors")   return (<svg {...p}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
+  return (<svg {...p}><circle cx="12" cy="12" r="3"/></svg>);
+}
 /* ── Main page ───────────────────────────────────────────────────── */
 export default function GEDIIHome() {
   const router = useRouter();
@@ -233,10 +258,11 @@ export default function GEDIIHome() {
   const [activeModule, setActiveModule] = useState(0);
   const [loaded,       setLoaded]       = useState(false);
   const [menuOpen,     setMenuOpen]     = useState(false);
+  const [activeSidebar, setActiveSidebar] = useState("home");
   useEffect(() => { setTimeout(() => setLoaded(true), 60); }, []);
 
   return (
-    <div style={{ fontFamily:"'Barlow','Segoe UI',system-ui,sans-serif", background:"#F5F4F0", minHeight:"100vh" }}>
+    <div style={{ fontFamily:"'Barlow','Segoe UI',system-ui,sans-serif", background:"#F4F2FC", minHeight:"100vh" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=Barlow:wght@400;500;600;700&display=swap');
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
@@ -253,6 +279,11 @@ export default function GEDIIHome() {
         .g-modules     { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
         .g-ftr-grid    { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; }
         .g-nav-toggle  { display:none; }
+        .g-sidebar-btn { display:flex; align-items:center; gap:14px; padding:13px 22px; background:none; border:none; border-left:3px solid transparent; cursor:pointer; font-family:inherit; text-align:left; width:100%; color:#5B4F78; font-weight:500; font-size:14px; transition:background .15s, color .15s; line-height:1.3; }
+        .g-sidebar-btn:hover { background:#F5F2FF; color:#1A0A3D; }
+        .g-sidebar-btn.on { background:#EDE6FA !important; color:#1A0A3D !important; font-weight:700 !important; border-left-color:#2D1658 !important; }
+        @media (max-width:900px) { .g-sidebar { width:60px !important; } .g-sidebar .g-sb-label { display:none !important; } .g-sidebar .g-sb-logo-text { display:none !important; } }
+        @media (max-width:600px) { .g-sidebar { display:none !important; } }
 
         @media (max-width: 1024px) {
           .g-hdr-title { font-size:14px !important; letter-spacing:0 !important; }
@@ -329,48 +360,85 @@ export default function GEDIIHome() {
         </div>
       </header>
 
-      {/* Nav */}
-      <nav className="g-nav" style={{ background:"#160B38", display:"flex", justifyContent:"center", padding:"0 32px" }}>
-        <button
-          className="g-nav-toggle"
-          data-open={menuOpen}
-          onClick={()=>setMenuOpen(o=>!o)}
-          aria-label="Abrir menú de navegación"
-          aria-expanded={menuOpen}
-        >
-          <span>{activeNav}</span>
-          <svg className="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </button>
-        <div className={`g-nav-items${menuOpen?" open":""}`} style={{ display:"flex" }}>
-          {NAV.map(item => {
-            const on = item === activeNav;
-            return (
-              <button key={item} onClick={()=>{ setActiveNav(item); setMenuOpen(false); if (NAV_ROUTES[item]) router.push(NAV_ROUTES[item]); }} className={`nb${on?" on":""}`}
-                style={{ background:"none", border:"none", borderBottom:on?"2.5px solid #E8A020":"2.5px solid transparent", color:on?"#E8A020":"rgba(255,255,255,.82)", padding:"15px 22px 13px", fontSize:"14px", fontWeight:on?"600":"400", cursor:"pointer", transition:"all .15s", whiteSpace:"nowrap" }}>
-                {item}
-              </button>
-            );
-          })}
-        </div>
-      </nav>
+      {/* ── Dashboard shell ──────────────────────────────────────────── */}
+      <div style={{ display:"flex", position:"relative", background:"#F4F2FC" }}>
+
+        {/* Sidebar */}
+        <aside className="g-sidebar" style={{ width:252, flexShrink:0, background:"#FFF", borderRight:"1px solid #E4DFF4", display:"flex", flexDirection:"column", position:"sticky", top:0, height:"100vh", overflowY:"auto", zIndex:10 }}>
+
+          {/* Logo */}
+          <div style={{ padding:"20px 18px 18px", borderBottom:"1px solid #F0ECF8" }}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <div style={{ width:36, height:36, borderRadius:8, background:"linear-gradient(135deg,#2D1658 0%,#4A2E8A 100%)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/></svg>
+              </div>
+              <span className="g-sb-logo-text" style={{ fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:20, color:"#1A0A3D", letterSpacing:.5, lineHeight:1 }}>GEDII</span>
+            </div>
+          </div>
+
+          {/* Nav items */}
+          <nav style={{ padding:"10px 0", flex:1 }}>
+            {SIDEBAR_ITEMS.map(item => {
+              const on = activeSidebar === item.key;
+              const iconColor = on ? "#1A0A3D" : "#7B68AE";
+              const icons = {
+                home:         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+                investigar:   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+                arquitectura: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2"/><circle cx="16" cy="19" r="2"/><circle cx="3" cy="19" r="2"/><path d="M9 7v8M9 15l-4-2M9 15l5-2"/></svg>,
+                datos:        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>,
+                divulgacion:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+                herramientas: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
+                etica:        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+                actores:      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+              };
+              return (
+                <button
+                  key={item.key}
+                  className={`g-sidebar-btn${on?" on":""}`}
+                  onClick={()=>{ setActiveSidebar(item.key); if (item.route) router.push(item.route); }}
+                >
+                  <span style={{ flexShrink:0 }}>{icons[item.key]}</span>
+                  <span className="g-sb-label">{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* User */}
+          <div style={{ padding:"16px 18px", borderTop:"1px solid #F0ECF8" }}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <div style={{ width:34, height:34, borderRadius:"50%", background:"#2D1658", color:"#FFF", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:700, fontSize:12, flexShrink:0 }}>LP</div>
+              <div className="g-sb-label" style={{ lineHeight:1.25 }}>
+                <div style={{ fontWeight:700, fontSize:13, color:"#1A0A3D" }}>Liliana Pérez</div>
+                <div style={{ fontSize:11, color:"rgba(45,22,88,.6)" }}>Dirección de Artes</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main content */}
+        <div style={{ flex:1, minWidth:0, overflowX:"hidden" }}>
+
+      {/* ── Dashboard investigaciones ──────────────────────── */}
+      <div style={{ background:"transparent", padding:"32px 36px 28px" }}>
+        <DashboardInvestigaciones />
+      </div>
 
       {/* Hero */}
-      <div className="g-hero" style={{ position:"relative", minHeight:"520px", display:"flex", alignItems:"center", overflow:"hidden" }}>
+      <div className="g-hero" style={{ position:"relative", minHeight:"260px", display:"flex", alignItems:"center", overflow:"hidden" }}>
         <img src={`data:image/jpeg;base64,${HERO_IMG}`} alt="Bailarinas colombianas con linternas"
           style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 25%", filter:"grayscale(100%) brightness(0.85)" }}/>
         <div style={{ position:"absolute", inset:0, background:"rgb(88,40,170)", mixBlendMode:"multiply", opacity:0.88 }}/>
         <div style={{ position:"absolute", inset:0, background:"linear-gradient(to right, rgba(8,2,22,0.96) 0%, rgba(8,2,22,0.80) 20%, rgba(8,2,22,0.40) 42%, rgba(8,2,22,0.05) 60%, transparent 75%)" }}/>
         <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"48%", background:"linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.92) 75%, #FFFFFF 100%)" }}/>
-        <div className="g-hero-body" style={{ position:"relative", zIndex:2, padding:"70px 44px 80px", maxWidth:"520px", animation:loaded?"slideL 0.7s 0.1s both":"none" }}>
-          <div style={{ fontFamily:"'Barlow Condensed',Impact,Arial Narrow,sans-serif", fontWeight:900, fontSize:"clamp(46px,6vw,76px)", lineHeight:"0.93", letterSpacing:"-1px", textTransform:"uppercase", marginBottom:"20px" }}>
+        <div className="g-hero-body" style={{ position:"relative", zIndex:2, padding:"32px 44px 44px", maxWidth:"480px", animation:loaded?"slideL 0.7s 0.1s both":"none" }}>
+          <div style={{ fontFamily:"'Barlow Condensed',Impact,Arial Narrow,sans-serif", fontWeight:900, fontSize:"clamp(28px,3.5vw,44px)", lineHeight:"0.95", letterSpacing:"-0.5px", textTransform:"uppercase", marginBottom:"20px" }}>
             <div style={{ color:"#FFF" }}>SABERES QUE</div>
             <div style={{ color:"#E8A020" }}>ILUMINAN</div>
             <div style={{ color:"#FFF" }}>POLÍTICAS</div>
             <div style={{ color:"#FFF" }}>CULTURALES</div>
           </div>
-          <p style={{ color:"rgba(255,255,255,.75)", fontSize:"14px", lineHeight:"1.68", marginBottom:"28px", maxWidth:"370px", fontFamily:"'Barlow',system-ui,sans-serif" }}>
+          <p style={{ color:"rgba(255,255,255,.75)", fontSize:"13px", lineHeight:"1.6", marginBottom:"18px", maxWidth:"370px", fontFamily:"'Barlow',system-ui,sans-serif" }}>
             Plataforma de gestión de herramientas, divulgación, datos y metodologías para fortalecer la política pública cultural en Colombia.
           </p>
           <div style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
@@ -512,6 +580,9 @@ export default function GEDIIHome() {
           </div>
         </div>
       </footer>
+
+        </div>{/* end main content */}
+      </div>{/* end dashboard shell */}
 
     </div>
   );
