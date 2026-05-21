@@ -66,7 +66,7 @@ export default function MapaColombiaInner({ data, fDepts = [], onDeptClick }) {
       const map = L.map(containerRef.current, {
         zoomControl: true,
         attributionControl: false,
-        scrollWheelZoom: true,
+        scrollWheelZoom: false,
         doubleClickZoom: true,
         zoomSnap: 0.25,
       });

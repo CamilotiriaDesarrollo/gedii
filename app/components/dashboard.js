@@ -210,24 +210,73 @@ function KPICardSm({ label, value, strokeColor = "#9880C8" }) {
   );
 }
 
-// ─── Nube de palabras ──────────────────────────────────────────────────────
-const WORD_SIZES    = [34,28,24,20,18,16,14,13,12];
-const WORD_COLORS   = [P,PD,"#6B4BB0","#4A2E8A","#7B68AE","#9080B8",P,"#4A2E8A",PD];
-const WORD_OPACITIES = [1,0.88,0.9,0.78,0.72,0.68,0.62,0.58,0.52];
+// ─── Nube de palabras ─────────────────────────────────────────────────────
+// Colores variados del sistema GEDII para dar vida a la nube
+// Paleta morada de oscuro a claro — el más frecuente obtiene el tono más oscuro
+const CLOUD_PURPLES = ["#1A0A3D","#2D1658","#4A2E8A","#6B4BB0","#7055AA","#9080B8","#A898CC","#C0B0E0","#D4C8F0"];
+// Orden visual mezclado para aspecto orgánico
+const CLOUD_ORDER   = [2, 5, 0, 7, 3, 1, 6, 4, 8];
 
-function WordCloud({ temas }) {
+function WordCloud({ temas, fTemas = [], onToggle }) {
   const sorted = useMemo(() => {
     const m = {};
     temas.forEach(t => { m[t]=(m[t]||0)+1; });
     return Object.entries(m).sort((a,b)=>b[1]-a[1]);
   }, [temas]);
+
+  const max = sorted[0]?.[1] || 1;
+  const min = sorted[sorted.length-1]?.[1] || 1;
+  const span = max - min || 1;
+
+  // Orden visual mezclado; color asignado por rango de frecuencia (no por posición visual)
+  const display = CLOUD_ORDER
+    .filter(i => i < sorted.length)
+    .map(i => ({ word: sorted[i][0], count: sorted[i][1], rank: i }));
+
   return (
-    <div style={{ display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"center", gap:"8px 12px", padding:"8px 4px", lineHeight:1.4 }}>
-      {sorted.map(([word],i) => (
-        <span key={word} style={{ fontSize:WORD_SIZES[i]||11, fontWeight:i<3?700:600, color:WORD_COLORS[i]||"#9080B8", opacity:WORD_OPACITIES[i]||0.45, fontFamily:"'Barlow',system-ui,sans-serif", cursor:"default" }}>
-          {word}
-        </span>
-      ))}
+    <div>
+      <div style={{
+        display:"flex", flexWrap:"wrap",
+        justifyContent:"center", alignItems:"baseline",
+        gap:"1px 6px", padding:"8px 2px 6px",
+        lineHeight: 1.25,
+      }}>
+        {display.map(({ word, count, rank }) => {
+          const ratio  = (count - min) / span;
+          const size   = Math.round(9 + ratio * 24);   // 9–33 px
+          const col    = CLOUD_PURPLES[Math.round((1 - ratio) * (CLOUD_PURPLES.length - 1))];
+          const act    = fTemas.includes(word);
+          return (
+            <button key={word} onClick={() => onToggle && onToggle(word)}
+              title={`${count} investigaciones`}
+              style={{
+                fontSize: size,
+                fontWeight: 400,
+                fontFamily:"'Barlow Condensed','Arial Narrow',sans-serif",
+                letterSpacing: "0.2px",
+                color: act ? "#FFF" : col,
+                background: act ? col : "transparent",
+                border: `1px solid ${act ? col : "transparent"}`,
+                borderRadius: 3,
+                padding:"0 2px",
+                cursor:"pointer",
+                lineHeight: 1.25,
+                transition:"all .15s",
+                opacity: act ? 1 : 0.4 + ratio * 0.6,
+              }}>
+              {word}
+            </button>
+          );
+        })}
+      </div>
+      {fTemas.length > 0 && (
+        <div style={{ textAlign:"center", marginTop:4 }}>
+          <button onClick={() => fTemas.forEach(t => onToggle && onToggle(t))}
+            style={{ fontSize:9, color:"#B5305B", background:"#FCE6EC", border:"1px solid #D4366A", borderRadius:999, padding:"3px 10px", cursor:"pointer", fontFamily:"inherit" }}>
+            ✕ Quitar selección de temas
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -855,10 +904,66 @@ function InstitucionPanel({ allData, filteredData, fDep, setFDep, fAlcance, setF
   );
 }
 
+// ─── Panel: Últimas investigaciones ───────────────────────────────────────
+function PanelUltimas({ data }) {
+  const sorted = useMemo(() =>
+    [...data].sort((a, b) => b.año - a.año || a.titulo.localeCompare(b.titulo))
+  , [data]);
+
+  return (
+    <div style={{ display:"flex", flexDirection:"column", gap:0 }}>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
+        <div style={LST}>Investigaciones registradas</div>
+        <span style={{ fontSize:10, color:P, fontWeight:700 }}>{sorted.length} total</span>
+      </div>
+
+      {/* Encabezado de tabla */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 36px 70px", gap:"0 8px", padding:"5px 8px", background:"#F0EDF8", borderRadius:"8px 8px 0 0", borderBottom:`1px solid ${BORDER}` }}>
+        <span style={{ fontSize:9, fontWeight:700, color:"#9080B8", textTransform:"uppercase", letterSpacing:"0.5px" }}>Título</span>
+        <span style={{ fontSize:9, fontWeight:700, color:"#9080B8", textTransform:"uppercase", letterSpacing:"0.5px", textAlign:"center" }}>Año</span>
+        <span style={{ fontSize:9, fontWeight:700, color:"#9080B8", textTransform:"uppercase", letterSpacing:"0.5px", textAlign:"center" }}>Estado</span>
+      </div>
+
+      {/* Filas scrollables */}
+      <div style={{ overflowY:"auto", maxHeight:420, borderRadius:"0 0 8px 8px", border:`1px solid ${BORDER}`, borderTop:"none" }}>
+        {sorted.map((inv, i) => (
+          <div key={inv.id} style={{
+            display:"grid", gridTemplateColumns:"1fr 36px 70px", gap:"0 8px",
+            padding:"7px 8px", borderBottom: i < sorted.length-1 ? `1px solid #F0EDF8` : "none",
+            background: i%2===0 ? "#FFF" : "#FAFAFA",
+            alignItems:"center",
+          }}>
+            <div>
+              <div style={{ fontSize:10, color:PD, fontWeight:500, lineHeight:1.3, overflow:"hidden", display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical" }}>
+                {inv.titulo}
+              </div>
+              <div style={{ fontSize:9, color:"#AAA", marginTop:2, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                {inv.departamentos[0]}{inv.departamentos.length > 1 ? ` +${inv.departamentos.length-1}` : ""}
+                {" · "}{inv.dependencia}
+              </div>
+            </div>
+            <span style={{ fontSize:10, color:"#888", textAlign:"center", fontWeight:600 }}>{inv.año}</span>
+            <span style={{
+              fontSize:9, fontWeight:700, textAlign:"center", padding:"3px 6px", borderRadius:999,
+              background: ECOLS[inv.estado]+"22", color: ECOLS[inv.estado],
+              border:`1px solid ${ECOLS[inv.estado]}55`, whiteSpace:"nowrap",
+            }}>{inv.estado}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ textAlign:"center", fontSize:9, color:"#CCC", marginTop:8 }}>
+        Fuente: Sistema de Información de Investigaciones
+      </div>
+    </div>
+  );
+}
+
 // ─── Selector de panel ─────────────────────────────────────────────────────
 const MODES = [
   { id:"A", name:"Temporal",  desc:"Tiempo, estado y territorio" },
   { id:"B", name:"Temático",  desc:"Temas, tipo y metodología" },
+  { id:"U", name:"Últimas",   desc:"Últimas investigaciones registradas" },
 ];
 const RIGHT_MODES = [
   { id:"I", name:"Instituc.",  desc:"Dependencia, alcance y actores" },
@@ -961,19 +1066,13 @@ export default function DashboardInvestigaciones() {
         <div style={{ flex:"0 0 50%", paddingRight:28 }}>
           <div style={{
             fontFamily:"'Barlow Condensed',Impact,Arial Narrow,sans-serif",
-            fontWeight:900, fontSize:"clamp(16px,1.7vw,24px)",
-            letterSpacing:"-0.3px", textTransform:"uppercase", lineHeight:1.1,
-            marginBottom:5, display:"flex", flexWrap:"wrap", alignItems:"baseline", gap:"0 6px",
+            fontWeight:900, fontSize:30,
+            letterSpacing:"-0.5px", textTransform:"uppercase", lineHeight:1.05,
+            marginBottom:0, display:"flex", flexWrap:"nowrap", alignItems:"baseline", gap:"0 7px", whiteSpace:"nowrap",
           }}>
             <span style={{ color:P }}>Saberes que</span>
             <span style={{ color:ACC }}>iluminan</span>
             <span style={{ color:P }}>políticas culturales</span>
-          </div>
-          <div style={{ display:"flex", alignItems:"baseline", gap:10 }}>
-            <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:22, color:PD, letterSpacing:-0.5, lineHeight:1 }}>
-              Resumen general
-            </h2>
-            <span style={{ fontSize:11, color:"#CCC" }}>Ministerio de las Culturas</span>
           </div>
         </div>
 
@@ -998,19 +1097,17 @@ export default function DashboardInvestigaciones() {
           <ModeTab modes={MODES} active={fMode} onChange={setFMode} />
           {fMode==="A" && <FilterPanelA {...commonProps} />}
           {fMode==="B" && <FilterPanelB {...commonProps} />}
+          {fMode==="U" && <PanelUltimas data={filtered} />}
         </div>
 
         {/* ── Mapa ── */}
         <div style={PANEL}>
           <PanelHeader title="Investigaciones por territorio" info="Clic en región para filtrar" />
-          {filtered.length===0
-            ? <div style={{ textAlign:"center", color:"#BBB", fontSize:12, padding:"80px 0" }}>Sin datos con los filtros actuales</div>
-            : <MapaColombia
-                data={filtered}
-                fDepts={fDepts}
-                onDeptClick={dept => setFDepts(prev => prev.includes(dept) ? prev.filter(x=>x!==dept) : [...prev, dept])}
-              />
-          }
+          <MapaColombia
+            data={filtered}
+            fDepts={fDepts}
+            onDeptClick={dept => setFDepts(prev => prev.includes(dept) ? prev.filter(x=>x!==dept) : [...prev, dept])}
+          />
         </div>
 
         {/* ── Panel derecho con tabs ── */}
@@ -1036,7 +1133,11 @@ export default function DashboardInvestigaciones() {
             <div style={{ paddingTop:4 }}>
               {allTemas.length === 0
                 ? <div style={{ textAlign:"center", color:"#BBB", fontSize:12, padding:"40px 0" }}>Sin datos</div>
-                : <WordCloud temas={allTemas} />
+                : <WordCloud
+                    temas={allTemas}
+                    fTemas={fTemas}
+                    onToggle={t => setFTemas(prev => prev.includes(t) ? prev.filter(x=>x!==t) : [...prev, t])}
+                  />
               }
             </div>
           )}
