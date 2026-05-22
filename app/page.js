@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import DashboardInvestigaciones from "./components/dashboard";
 import PrincipiosInvestigacion from "./components/PrincipiosInvestigacion";
+import ArquitecturaMetodologica from "./components/ArquitecturaMetodologica";
 
 const NAV_ROUTES = { "Inicio":"/", "Investigar":"/investigar" };
 
@@ -39,15 +40,34 @@ export default function GEDIIHome() {
   const [menuOpen,     setMenuOpen]     = useState(false);
   const [activeSidebar, setActiveSidebar] = useState("home");
   const [navCollapsed, setNavCollapsed] = useState(false);
-  const [sidebarHovered, setSidebarHovered] = useState(false);
   const [loaded,       setLoaded]       = useState(false);
+  const [sbTop,        setSbTop]        = useState(0);
+  const [sbBottom,     setSbBottom]     = useState(0);
+  const headerRef = useRef(null);
+  const footerRef = useRef(null);
+
   useEffect(() => { setTimeout(() => setLoaded(true), 60); }, []);
+
   useEffect(() => {
-    const onScroll = () => { if (window.scrollY > 60) setNavCollapsed(true); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    function calcBounds() {
+      const hdr = headerRef.current;
+      const ftr = footerRef.current;
+      if (!hdr || !ftr) return;
+      const hdrBottom = Math.max(0, hdr.getBoundingClientRect().bottom);
+      const ftrTop    = ftr.getBoundingClientRect().top;
+      setSbTop(hdrBottom);
+      setSbBottom(Math.max(0, window.innerHeight - ftrTop));
+    }
+    calcBounds();
+    window.addEventListener('scroll', calcBounds, { passive: true });
+    window.addEventListener('resize', calcBounds);
+    return () => {
+      window.removeEventListener('scroll', calcBounds);
+      window.removeEventListener('resize', calcBounds);
+    };
   }, []);
-  const sidebarW = (navCollapsed && !sidebarHovered) ? 62 : 252;
+
+  const sidebarW = navCollapsed ? 62 : 252;
 
   return (
     <div style={{ fontFamily:"'Barlow','Segoe UI',system-ui,sans-serif", background:"#F4F2FC", minHeight:"100vh" }}>
@@ -130,7 +150,7 @@ export default function GEDIIHome() {
       </div>
 
       {/* Header */}
-      <header className="g-hdr" style={{ background:"#FFF", padding:"14px 32px", display:"flex", alignItems:"center", gap:"20px", borderBottom:"1px solid rgba(0,0,0,0.07)", animation:loaded?"fadeIn 0.4s ease both":"none" }}>
+      <header ref={headerRef} className="g-hdr" style={{ background:"#FFF", padding:"14px 32px", display:"flex", alignItems:"center", gap:"20px", borderBottom:"1px solid rgba(0,0,0,0.07)", animation:loaded?"fadeIn 0.4s ease both":"none" }}>
         <img className="g-hdr-logo" src={`data:image/png;base64,${LOGO_IMG}`} alt="Culturas" style={{ height:"72px", width:"auto", objectFit:"contain", flexShrink:0 }}/>
         <div className="g-hdr-divider" style={{ width:"1px", height:"54px", background:"rgba(0,0,0,.13)", flexShrink:0 }}/>
         <h1 className="g-hdr-title" style={{ margin:0, fontSize:"clamp(12px,1.5vw,18px)", fontWeight:"700", color:"#2D1658", letterSpacing:"0.3px", lineHeight:1.25, flex:1, fontFamily:"'Barlow',system-ui,sans-serif" }}>
@@ -151,17 +171,15 @@ export default function GEDIIHome() {
       {/* ── Dashboard shell ──────────────────────────────────────────── */}
       <div style={{ display:"flex", position:"relative", background:"#F4F2FC" }}>
 
-        {/* Sidebar */}
-        <aside className="g-sidebar" onMouseEnter={()=>setSidebarHovered(true)} onMouseLeave={()=>setSidebarHovered(false)} style={{ width:sidebarW, flexShrink:0, background:"#FFF", borderRight:"1px solid #E4DFF4", display:"flex", flexDirection:"column", position:"sticky", top:0, height:"100vh", zIndex:10, transition:"width 0.25s ease", overflow:"hidden" }}>
+        {/* Sidebar — fixed, siempre visible en pantalla, flota sobre contenido */}
+        <aside className="g-sidebar" style={{ width:sidebarW, background:"rgba(255,255,255,0.55)", backdropFilter:"blur(14px)", WebkitBackdropFilter:"blur(14px)", borderRight:"1px solid rgba(228,223,244,0.5)", display:"flex", flexDirection:"column", position:"fixed", top:sbTop, bottom:sbBottom, left:0, zIndex:20, transition:"width 0.25s ease, top 0.08s linear, bottom 0.08s linear", overflow:"hidden" }}>
 
-          {/* Logo */}
-          <div style={{ padding:"20px 18px 18px", borderBottom:"1px solid #F0ECF8" }}>
-            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-              <div style={{ width:36, height:36, borderRadius:8, background:"linear-gradient(135deg,#2D1658 0%,#4A2E8A 100%)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/></svg>
-              </div>
-              <span className="g-sb-logo-text" style={{ fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:20, color:"#1A0A3D", letterSpacing:.5, lineHeight:1 }}>GEDII</span>
-            </div>
+          {/* Botón colapsar */}
+          <div style={{ padding:"12px 14px 10px", borderBottom:"1px solid #F0ECF8", display:"flex", justifyContent: navCollapsed ? "center" : "flex-end" }}>
+            <button onClick={()=>setNavCollapsed(c=>!c)} title={navCollapsed?"Expandir menú":"Colapsar menú"} style={{ background:"none", border:"none", cursor:"pointer", color:"#9080B8", display:"flex", alignItems:"center", gap:4, padding:"4px 6px", borderRadius:6 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform:navCollapsed?"rotate(180deg)":"none", transition:"transform 0.25s" }}><polyline points="15 18 9 12 15 6"/></svg>
+              {!navCollapsed && <span style={{ fontSize:10, color:"#9080B8" }}>colapsar</span>}
+            </button>
           </div>
 
           {/* Nav items */}
@@ -205,15 +223,23 @@ export default function GEDIIHome() {
         </aside>
 
         {/* Main content */}
-        <div style={{ flex:1, minWidth:0, overflowX:"hidden" }}>
+        <div style={{ flex:1, minWidth:0, overflowX:"hidden", marginLeft: navCollapsed ? sidebarW : 0, transition:"margin-left 0.25s ease" }}>
 
-      {/* ── Dashboard investigaciones ──────────────────────── */}
-      <div style={{ background:"transparent", padding:"32px 36px 28px" }}>
-        <DashboardInvestigaciones />
-      </div>
+      {activeSidebar === "arquitectura" ? (
+        <ArquitecturaMetodologica />
+      ) : (
+        <>
+          {/* Dashboard investigaciones */}
+          <div style={{ background:"transparent", padding:"32px 36px 28px" }}>
+            <DashboardInvestigaciones />
+          </div>
+          {/* Principios */}
+          <PrincipiosInvestigacion />
+        </>
+      )}
 
-      {/* Principios */}
-      <PrincipiosInvestigacion />
+        </div>{/* end main content */}
+      </div>{/* end dashboard shell */}
 
       {/* Tira de plataformas */}
       <div className="tira-footer">
@@ -243,7 +269,7 @@ export default function GEDIIHome() {
       </div>
 
       {/* ── Footer ─────────────────────────────────────────────── */}
-      <footer style={{ background:"#4D3398", color:"#FFF", fontFamily:"'Barlow',system-ui,sans-serif", fontSize:"13px", lineHeight:1.6 }}>
+      <footer ref={footerRef} style={{ background:"#4D3398", color:"#FFF", fontFamily:"'Barlow',system-ui,sans-serif", fontSize:"13px", lineHeight:1.6 }}>
         <div className="g-ftr-wrap" style={{ maxWidth:"1280px", margin:"0 auto", padding:"36px 40px 28px" }}>
 
           {/* Top: GOV.CO + escudo */}
@@ -327,9 +353,6 @@ export default function GEDIIHome() {
           </div>
         </div>
       </footer>
-
-        </div>{/* end main content */}
-      </div>{/* end dashboard shell */}
 
     </div>
   );

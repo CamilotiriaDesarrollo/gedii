@@ -1,67 +1,83 @@
 'use client';
 
+// 10 paletas oscuras con estilo GEDII — asignadas en orden mezclado
+const PALETAS = [
+  { bg: "#0F3320", tint: "#EDFAF2", frontAccent: "#1F7A45" }, // 0 verde bosque
+  { bg: "#2D0A3D", tint: "#F7EFFE", frontAccent: "#7A1A9A" }, // 1 violeta oscuro
+  { bg: "#3A1A00", tint: "#FFF5E8", frontAccent: "#B05010" }, // 2 ámbar quemado
+  { bg: "#0A1A35", tint: "#EEF3FC", frontAccent: "#1A4A8A" }, // 3 azul medianoche
+  { bg: "#380A18", tint: "#FEE8EF", frontAccent: "#A0204A" }, // 4 carmesí
+  { bg: "#1E1040", tint: "#F0EEFE", frontAccent: "#5840B0" }, // 5 índigo pizarra
+  { bg: "#063020", tint: "#E6F8F0", frontAccent: "#0F6840" }, // 6 esmeralda
+  { bg: "#301500", tint: "#FFF4E5", frontAccent: "#C05820" }, // 7 siena
+  { bg: "#0A2A2A", tint: "#E8F8F8", frontAccent: "#1A7070" }, // 8 teal profundo
+  { bg: "#200A40", tint: "#F3EEFE", frontAccent: "#5C2D9A" }, // 9 púrpura real
+];
+// Orden mezclado: cada posición i toma PALETAS[MEZCLA[i]]
+const MEZCLA = [3, 6, 0, 9, 4, 7, 1, 5, 2, 8];
+
 const PRINCIPIOS = [
   {
     id: 1,
     nombre: "Cuidado y protección de la diversidad de la vida",
-    descripcion: "Las investigaciones reconocen y protegen la diversidad biocultural como fundamento de la vida colectiva. Cada proceso incorpora una mirada de respeto hacia las formas de existencia humana y no humana, los territorios y las cosmovisiones de las comunidades.",
-    bg: "#1A3D2B", tint: "#F0FAF4", frontAccent: "#2D7A4A",
+    descripcion: "Acogiendo los enfoques del PNC 2024-2038 se propone que la investigación cultural contribuya al cuidado y protección de la diversidad de la vida en todas sus dimensiones (biológica, cultural y lingüística), y reconoce la interdependencia entre comunidades, territorios y ecosistemas. Toda decisión metodológica y ética se orienta a evitar daños sobre los entornos bioculturales y a fortalecer las capacidades de las comunidades y territorios para su preservación.",
+    cita: "MinCulturas, 2024, pp. 48–49",
   },
   {
     id: 2,
     nombre: "Dignidad y ética territorial",
-    descripcion: "Toda investigación se desarrolla con pleno reconocimiento de la dignidad de las personas y comunidades participantes. El territorio es lugar de memoria, identidad y derechos, lo que orienta todas las decisiones metodológicas y relacionales.",
-    bg: "#1A2D4A", tint: "#EEF5FC", frontAccent: "#2D5B8A",
+    descripcion: "Toda investigación debe garantizar el respeto a la vida, la dignidad y las formas propias de organización y decisión de las comunidades, asegurando procesos basados en el consentimiento previo, libre e informado y en relaciones de confianza. Este principio orienta la actuación institucional para evitar prácticas extractivas de conocimiento y proteger los saberes, las memorias y los derechos culturales de los actores involucrados, en coherencia con el enfoque territorial y diferencial del PNC.",
+    cita: "MinCulturas, 2024, pp. 48–49, 55–56",
   },
   {
     id: 3,
     nombre: "Sentido social, justicia y transformación",
-    descripcion: "Las investigaciones tienen propósito transformador: aportan conocimiento que contribuye a la equidad, la justicia cultural y el reconocimiento de las desigualdades. Los hallazgos se traducen en acciones concretas para comunidades y territorios.",
-    bg: "#3D2800", tint: "#FFF8EE", frontAccent: "#A06010",
+    descripcion: "El conocimiento producido responde a necesidades reales del sector cultural y aporta evidencia útil para orientar decisiones territoriales, sociales y de política pública que contribuyan a la justicia social, económica y ambiental. Su finalidad es aportar al mejoramiento de las condiciones de vida de artistas, gestores, comunidades y pueblos, al fortalecer sus capacidades y contribuir a la construcción de paz y a la transformación de las desigualdades históricas.",
+    cita: "MinCulturas, 2024, pp. 49–50, 80–84",
   },
   {
     id: 4,
     nombre: "Diálogo de saberes",
-    descripcion: "Se reconoce la pluralidad epistémica: saberes académicos, comunitarios, ancestrales y populares tienen igual valor y pueden articularse en procesos de co-creación. El diálogo de saberes es condición para la legitimidad y pertinencia del conocimiento.",
-    bg: "#2D1658", tint: "#F5F2FF", frontAccent: "#4A2E8A",
+    descripcion: "La investigación reconoce y articula distintos sistemas de conocimiento, al valorar por igual los aportes de sabedores, artistas, comunidades, pueblos étnicos, academia, sector privado y otros agentes culturales. Este principio garantiza que las decisiones investigativas integren perspectivas diversas y se construyan resultados basados en participación efectiva, reconocimiento mutuo y diálogo intercultural.",
+    cita: "MinCulturas, 2024, pp. 62–64, 76–80",
   },
   {
     id: 5,
     nombre: "Rigor y calidad técnica",
-    descripcion: "Las investigaciones aplican estándares metodológicos rigurosos, garantizando trazabilidad, replicabilidad y validez de los procesos y resultados. La calidad técnica y la sensibilidad cultural son condiciones igualmente necesarias.",
-    bg: "#1A0A3D", tint: "#EEEDFE", frontAccent: "#3730A3",
+    descripcion: "Todos los procesos de investigación se fundamentan en criterios verificables que aseguran la precisión, la coherencia interna y la trazabilidad de la información. La producción de datos, relatos y análisis cumple con los estándares técnicos institucionales para garantizar su confiabilidad, comparabilidad y utilidad en la formulación, seguimiento y evaluación de las políticas culturales. La producción de conocimiento se articulará con el Sistema Estadístico Nacional (SEN), conforme a la Ley 2335 de 2023, y con los protocolos de gobernanza de la información y protección de datos personales establecidos en la Ley 1581 de 2012.",
+    cita: "MinCulturas, 2024, pp. 43–44, 141–142; Congreso de la República de Colombia, 2023",
   },
   {
     id: 6,
     nombre: "Transparencia, accesibilidad y soberanía de la información",
-    descripcion: "Los datos y resultados son patrimonio público. Las investigaciones garantizan que la información producida sea accesible, comprensible y útil para las comunidades y la ciudadanía, con especial atención a lenguajes cercanos y no académicos.",
-    bg: "#1A3D3D", tint: "#EEF9F9", frontAccent: "#2A7A7A",
+    descripcion: "La información y los saberes generados con recursos públicos constituyen un bien público y de interés colectivo. El MinCulturas garantiza su circulación responsable e incorpora la dimensión de accesibilidad comunicativa: lenguajes claros, mediaciones pedagógicas, formatos accesibles y adaptaciones pertinentes según contextos territoriales, tecnológicos y poblacionales. Al mismo tiempo, se reconoce la soberanía de la información: los datos y saberes producidos o recopilados en procesos investigativos pertenecen al sector público y a las comunidades que los originan, y su uso se orienta a la garantía de derechos culturales y la gobernanza cultural.",
+    cita: "MinCulturas, 2024, pp. 15–16, 148–150; 49–50, 141",
   },
   {
     id: 7,
     nombre: "Gobernanza de datos culturales y responsabilidad digital",
-    descripcion: "El manejo de datos culturales implica responsabilidades específicas: protección de identidades, consentimiento informado, propiedad colectiva de la información y prevención de usos discriminatorios. Las plataformas operan con marcos de gobernanza participativos.",
-    bg: "#2D1A58", tint: "#F5F0FF", frontAccent: "#6B4BB0",
+    descripcion: "La investigación cultural reconoce los datos como un activo estratégico para la gestión del conocimiento y la formulación de políticas públicas. Se adoptan prácticas de gobernanza de datos que aseguren su integridad, trazabilidad, interoperabilidad y uso responsable durante todo su ciclo de vida, fortaleciendo los sistemas de información cultural y garantizando que la información producida contribuya al análisis, la memoria institucional y la toma de decisiones basada en evidencia.",
+    cita: "OECD, 2019; UNESCO, 2021",
   },
   {
     id: 8,
     nombre: "Uso responsable de IA y ética algorítmica",
-    descripcion: "Las herramientas de IA deben auditarse frente a sesgos culturales, étnico-raciales y de género. El uso de algoritmos es transparente, su lógica explicable, y sus resultados están siempre sujetos a revisión humana y comunitaria.",
-    bg: "#3D1A2A", tint: "#FFF0F4", frontAccent: "#B5305B",
+    descripcion: "El uso de inteligencia artificial, agentes automatizados y herramientas de análisis de datos debe fortalecer la capacidad analítica institucional sin sustituir el juicio crítico ni los saberes territoriales. Reconociendo el nivel de madurez tecnológica actual del MinCulturas, su adopción deberá estar precedida por el desarrollo de capacidades internas que garanticen un uso informado, crítico y sostenible de estas herramientas, incluyendo procesos de formación del talento humano, definición de protocolos institucionales y apropiación progresiva de las tecnologías. Su implementación debe garantizar transparencia, supervisión humana y prevención de sesgos. La IA podrá aplicarse en: (i) análisis de texto y codificación de información cualitativa; (ii) identificación de patrones en grandes volúmenes de datos; y (iii) visualización de resultados. Todo uso deberá respetar la propiedad intelectual colectiva (Decisión Andina 351) y cumplir con la Ley 1581 de 2012 en materia de protección de datos personales.",
+    cita: "UNESCO, 2021; OECD, 2023; Comunidad Andina, 1993; Congreso de la República, 2012",
   },
   {
     id: 9,
     nombre: "Pluralismo metodológico",
-    descripcion: "No existe un único método válido para investigar la cultura. El Ministerio promueve la articulación de enfoques cuantitativos, cualitativos, participativos y experimentales, adaptados a cada contexto, comunidad y pregunta de investigación.",
-    bg: "#2D1A00", tint: "#FFF8EE", frontAccent: "#C86820",
+    descripcion: "El MinCulturas reconoce la diversidad de enfoques de investigación (artísticos, sociales, patrimoniales, digitales, comunitarios y otros) y permite su selección según la naturaleza del estudio y las características del territorio. La elección metodológica evita la imposición de modelos únicos y garantiza la calidad técnica, la pertinencia biocultural y la coherencia con los enfoques transversales del PNC: biocultural, territorial, diferencial, de género e intersectorial.",
+    cita: "MinCulturas, 2024, pp. 52–58, 92–94",
   },
   {
     id: 10,
     nombre: "Sostenibilidad y memoria",
-    descripcion: "La investigación cultural construye memoria institucional y colectiva. Sus resultados deben preservarse, actualizarse y ponerse en diálogo con procesos pasados y futuros, contribuyendo a la sostenibilidad del conocimiento como bien común intergeneracional.",
-    bg: "#0A2D28", tint: "#EEF9F5", frontAccent: "#2D7A6A",
+    descripcion: "Las investigaciones se diseñan con criterios de preservación y sostenibilidad para asegurar que los datos, relatos y archivos se resguarden adecuadamente y permanezcan disponibles para consultas futuras. Este principio comprende no solo la preservación técnica, sino también la generación de productos de divulgación, consulta y apropiación que permitan la reutilización institucional, social y territorial, fortaleciendo la memoria institucional y su articulación con la gestión integral de los patrimonios y las memorias en el campo del PNC.",
+    cita: "MinCulturas, 2024, pp. 92–95, 103–105",
   },
-];
+].map((p, i) => ({ ...p, ...PALETAS[MEZCLA[i]] }));
 
 function PrincipioCard({ p }) {
   return (
@@ -77,7 +93,7 @@ function PrincipioCard({ p }) {
             margin: 0,
             fontFamily: "'Barlow Condensed','Arial Narrow',sans-serif",
             fontWeight: 700,
-            fontSize: 'clamp(13px, 1.1vw, 17px)',
+            fontSize: 'clamp(18px, 1.5vw, 22px)',
             color: '#2E2666',
             lineHeight: 1.3,
             flex: 1,
@@ -91,18 +107,29 @@ function PrincipioCard({ p }) {
           <span style={{ fontSize: 10, color: '#C0B8D8', display: 'block', textAlign: 'right' }}>leer →</span>
         </div>
 
-        {/* Reverso: solo la descripción, con scroll */}
+        {/* Reverso: descripción + cita en cursiva */}
         <div
           className="v1-flip__back principio-back"
-          style={{ background: p.bg, padding: '18px 16px', gap: 0 }}
+          style={{ background: p.bg, padding: '18px 16px', gap: 0, justifyContent: 'space-between' }}
         >
           <p style={{
-            fontSize: 13,
+            fontSize: 12,
             color: 'rgba(255,255,255,0.88)',
             lineHeight: 1.65,
-            margin: 0,
+            margin: '0 0 10px 0',
+            flex: 1,
           }}>
             {p.descripcion}
+          </p>
+          <p style={{
+            fontSize: 10.5,
+            color: 'rgba(255,255,255,0.5)',
+            fontStyle: 'italic',
+            margin: 0,
+            lineHeight: 1.4,
+            flexShrink: 0,
+          }}>
+            ({p.cita})
           </p>
         </div>
 
