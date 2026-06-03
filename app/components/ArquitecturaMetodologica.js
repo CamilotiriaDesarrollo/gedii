@@ -23,99 +23,65 @@ const AREAS = [
     color: "#2D1658",
     tint:  "#EDE6FA",
     accent:"#7B68AE",
-    campos: [
-      "Políticas culturales: normatividad, regulación e institucionalidad del sector",
-      "Lenguajes artísticos, sistemas simbólicos y semiótica cultural",
-      "Economía creativa y cultural: industrias, mercados y empleo",
-      "Diplomacia cultural y cooperación internacional",
-      "Cultura y comunicación: medios, narrativas públicas y opinión",
-      "Educación artística y cultural: enfoques, calidad e impacto",
-      "Propiedad intelectual, derechos de autor y conocimiento colectivo",
-      "Infraestructura cultural: espacios, equipamientos y redes",
-    ],
-    prioridades: [
-      "Análisis crítico de implementación del PNC 2024-2038 en territorios",
-      "Evaluación de efectividad de políticas culturales departamentales y municipales",
-      "Industrias culturales y creativas: empleo, formalización y encadenamientos",
-      "Marcos normativos del sector: brechas, vacíos y propuestas",
-      "Economía naranja: medición de impacto económico y social",
-      "Presupuesto público en cultura: análisis comparado y tendencias",
-    ],
-    enfos: [
-      "Análisis de políticas públicas (policy analysis)",
-      "Enfoque territorial y diferencial",
-      "Intersectorial (cultura-economía-educación)",
-      "Economía de la cultura y las artes",
-      "Comunicación intercultural",
-      "Evaluación basada en derechos culturales",
-    ],
-    metodologias: [
-      { nombre:"Análisis documental y de políticas", desc:"Revisión sistemática de normatividad, planes, programas y presupuestos" },
-      { nombre:"Investigación cuantitativa", desc:"Estadísticas del sector, indicadores, medición de cobertura e impacto" },
-      { nombre:"Evaluación de impacto", desc:"Estudios cuasi-experimentales, antes-después, grupos de comparación" },
-      { nombre:"Estudios comparados internacionales", desc:"Análisis de políticas culturales en América Latina y OCDE" },
-      { nombre:"Revisión sistemática de literatura", desc:"Meta-análisis, síntesis de evidencia sobre efectividad de políticas" },
-      { nombre:"Investigación mixta", desc:"Combinación de encuestas, entrevistas y análisis documental" },
+    tipo: "detalle",
+    descripcion: "La Experimentación, Lenguajes y Estética como campo de investigación cultural se ocupa del estudio del arte en sí mismo: sus técnicas, procesos creativos, lenguajes formales y fundamentos estéticos a través de todas las disciplinas artísticas. No investiga el arte en función de sus efectos sociales o políticos, sino que indaga en la naturaleza del hacer, el percibir y el interpretar la obra como formas legítimas de producción de conocimiento. Articula tres aproximaciones metodológicas: la práctica y el proceso creativo como método de investigación, la experiencia estética como objeto de análisis fenomenológicos en cualquier disciplina artística, y la hermenéutica como vía para comprender obras, lenguajes y trayectorias de autor.",
+    fin: "Producir conocimiento sobre las técnicas, estéticas, lenguajes y teorías del arte a través de la investigación en y desde la práctica creativa, la experiencia estética y la interpretación crítica de obras y trayectorias artísticas en cualquier disciplina.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Investigación Basada en la Práctica e Investigación + Creación",
+        desc: "estudios en taller, experimentación material, prototipado artístico, creación como método de conocimiento, residencias, iteración técnica.",
+      },
+      {
+        num: 2,
+        nombre: "Fenomenología y Estudios de la Experiencia Estética",
+        desc: "experiencia perceptiva en cualquier disciplina artística, estudios situados, recepción estética, arte relacional, investigación somática, análisis sensorial de obra.",
+      },
+      {
+        num: 3,
+        nombre: "Hermenéutica y Estudios de Autor, Obra y Trayectoria",
+        desc: "análisis de obra, estudios biográficos y de trayectoria artística, crítica genética, análisis de lenguajes y estilos, autoetnografía artística, estudio de poéticas personales.",
+      },
     ],
     resultados: [
-      "Informes de diagnóstico y política cultural sectorial y territorial",
-      "Indicadores de gestión, cobertura y calidad de la política cultural",
-      "Mapas normativos del sector cultural colombiano",
-      "Recomendaciones de política pública basadas en evidencia",
-      "Análisis comparados de economía creativa e industrias culturales",
-      "Boletines estadísticos del sector cultural",
-      "Evaluaciones de planes, programas y proyectos culturales",
+      "Obras, dispositivos artísticos y prototipos creativos con memoria investigativa.",
+      "Bitácoras de proceso, catálogos razonados y publicaciones académico-artísticas derivadas de la práctica.",
+      "Estudios fenomenológicos y análisis de experiencia estética en artes visuales, sonoras, literarias, digitales y escénicas.",
+      "Monografías, estudios de obra y análisis de trayectorias y poéticas de autor.",
+      "Marcos teóricos y conceptuales sobre lenguajes artísticos contemporáneos en el contexto colombiano, otros.",
     ],
   },
   {
     id: 2,
-    nombre: "Transformación social y expresión cultural",
+    nombre: "Transformación social y agencia cultural",
     color: "#063020",
     tint:  "#E6F8F0",
     accent:"#1F7A45",
-    campos: [
-      "Culturas para la paz, la reconciliación y la convivencia",
-      "Arte, género y diversidades sexuales e identidades de género",
-      "Cultura y educación popular: pedagogías críticas y comunitarias",
-      "Expresiones culturales de comunidades negras, afrocolombianas, raizales y palenqueras",
-      "Expresiones culturales de pueblos indígenas y sus cosmogonías",
-      "Cultura urbana, culturas juveniles y subculturas",
-      "Arte-terapia, cultura y salud mental comunitaria",
-      "Cultura y discapacidad: accesibilidad y participación plena",
-      "Festivales, carnavales y manifestaciones populares",
-    ],
-    prioridades: [
-      "Cultura y construcción de paz territorial en zonas de posconflicto",
-      "Expresiones culturales LGBTQ+ y diversidades en el espacio público",
-      "Cultura como herramienta de transformación social y reducción de violencias",
-      "Fortalecimiento de expresiones culturales étnicas en contextos urbanos",
-      "Culturas juveniles y participación ciudadana",
-      "Arte y memoria del conflicto armado colombiano",
-    ],
-    enfos: [
-      "Género e interseccionalidad",
-      "Diferencial étnico (indígena, afrocolombiano, ROM, raizal, palenquero)",
-      "Territorial y biocultural",
-      "Educación popular y pedagogías críticas (Freire, Fals Borda)",
-      "Paz y no violencia",
-      "Enfoque de derechos culturales",
-    ],
-    metodologias: [
-      { nombre:"Investigación Acción Participativa (IAP)", desc:"Co-construcción de conocimiento con comunidades como sujetos activos de investigación" },
-      { nombre:"Etnografía y etnografía visual", desc:"Trabajo de campo prolongado, observación participante, fotografía y video etnográfico" },
-      { nombre:"Sistematización de experiencias", desc:"Método Oscar Jara para recuperar aprendizajes de procesos organizativos y artísticos" },
-      { nombre:"Investigación artística basada en las artes", desc:"La creación artística como proceso metodológico de producción de conocimiento" },
-      { nombre:"Grupos focales y talleres comunitarios", desc:"Espacios de reflexión colectiva con actores del territorio cultural" },
-      { nombre:"Narrativas y testimonios de vida", desc:"Historias de vida, relatos testimoniales, biografías culturales" },
+    tipo: "detalle",
+    descripcion: "Transformación Social y Agencia Cultural es el campo que investiga el papel de la cultura y las artes como fuerzas activas de cambio en el tejido social colombiano. Su objeto de estudio son los procesos mediante los cuales comunidades, organizaciones y territorios se transforman a través de prácticas culturales participativas, creación colectiva y pedagogías críticas. A diferencia de otros campos, no separa la investigación de la intervención: aquí el conocimiento se produce en el hacer conjunto con las comunidades. Se articula sobre tres ejes metodológicos: la investigación-acción participativa como marco de co-producción de saber, la Investigación + Creación como apuesta artístico-comunitaria que reconoce el arte como motor de transformación social, y las pedagogías culturales como vía para formar agentes de cambio en los territorios.",
+    fin: "Generar conocimiento situado sobre los procesos culturales que modifican dinámicas de convivencia, cohesión social y agenciamiento ciudadano en territorios específicos, a través de metodologías participativas, creación colectiva y pedagogías críticas que involucran activamente a las comunidades como sujetos de investigación y transformación.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Investigación-Acción Participativa (IAP)",
+        desc: "procesos investigativos liderados con y desde comunidades; diagnósticos participativos, cartografías sociales, sistematización de experiencias comunitarias, investigación en territorios de conflicto y posconflicto, organizaciones culturales de base.",
+      },
+      {
+        num: 2,
+        nombre: "Investigación + Creación (I+C)",
+        desc: "procesos artísticos como método de transformación social, creación colectiva en territorios, arte comunitario, muralismo y arte público participativo, teatro del oprimido, música y danza como herramientas de cohesión social, residencias artísticas con impacto territorial.",
+      },
+      {
+        num: 3,
+        nombre: "Pedagogías Culturales y Educación Popular",
+        desc: "mediación cultural comunitaria, educación no formal desde las artes, metodologías de educación popular (Freire), formación de agentes culturales locales, dispositivos pedagógicos para la convivencia, cultura de paz y reconciliación.",
+      },
     ],
     resultados: [
-      "Sistematizaciones de procesos artísticos y culturales transformadores",
-      "Documentales, piezas audiovisuales y radiales comunitarias",
-      "Memorias de experiencias de cultura y paz en territorios",
-      "Protocolos de trabajo artístico-comunitario con enfoque diferencial",
-      "Guías pedagógicas para educación artística con enfoque de paz",
-      "Análisis de expresiones culturales en contextos de transición",
-      "Mapas de actores y organizaciones culturales transformadoras",
+      "Sistematizaciones de experiencias y cartografías sociales derivadas de procesos de investigación-acción con comunidades.",
+      "Cajas de herramientas (toolkits) culturales, dispositivos pedagógicos y guías metodológicas para la transformación social desde las artes.",
+      "Obras, prototipos y procesos de creación colectiva con memoria investigativa e impacto territorial documentado.",
+      "Publicaciones académicas, ensayos críticos e informes de impacto sobre cultura, convivencia y cohesión social en contextos colombianos, otros.",
     ],
   },
   {
@@ -124,151 +90,98 @@ const AREAS = [
     color: "#380A18",
     tint:  "#FEE8EF",
     accent:"#A0204A",
-    campos: [
-      "Patrimonio cultural material: bienes inmuebles, muebles y arqueológicos (BIC)",
-      "Patrimonio cultural inmaterial: tradiciones, saberes, rituales y fiestas",
-      "Patrimonio natural y diversidad biológica vinculada a la cultura",
-      "Memoria histórica: conflicto armado, verdad, reparación y no repetición",
-      "Identidades culturales regionales, locales y diaspóricas",
-      "Historia del arte y la cultura colombiana: siglos XIX-XXI",
-      "Crítica cultural, estudios culturales y teoría estética",
-      "Lenguas nativas, diversidad lingüística y políticas de lenguas",
-      "Archivos, colecciones y museos: gestión y democratización del acceso",
-    ],
-    prioridades: [
-      "Salvaguardia del patrimonio cultural inmaterial en riesgo",
-      "Investigación sobre memoria del conflicto armado con perspectiva comunitaria",
-      "Identidades indígenas, afrocolombianas y ROM: reconocimiento y visibilización",
-      "Archivos históricos en riesgo y digitalización del patrimonio documental",
-      "Lenguas en peligro de extinción: revitalización y transmisión intergeneracional",
-      "Patrimonio arqueológico: investigación, protección y difusión",
-    ],
-    enfos: [
-      "Étnico diferencial (pueblos indígenas, NARP, ROM)",
-      "Territorial (patrimonios locales, regionales y nacionales)",
-      "Decolonial y epistemologías del sur",
-      "Perspectiva de género y memoria de las mujeres",
-      "Historia oral y memorias subalternas",
-      "Biocultural (relación entre patrimonio natural y cultural)",
-    ],
-    metodologias: [
-      { nombre:"Investigación documental y archivística", desc:"Análisis de fuentes primarias, archivos históricos, prensa, fotografía histórica y documentos oficiales" },
-      { nombre:"Historia oral y etnobiografía", desc:"Entrevistas a profundidad, relatos de vida, recuperación de memorias en riesgo" },
-      { nombre:"Etnografía del patrimonio", desc:"Observación de prácticas rituales, fiestas, tradiciones artesanales y saberes" },
-      { nombre:"Análisis semiótico y de discurso", desc:"Lectura crítica de textos, imágenes, objetos y narrativas culturales" },
-      { nombre:"Estudios de caso patrimonial", desc:"Análisis en profundidad de manifestaciones, bienes o sitios específicos" },
-      { nombre:"Cartografía cultural y patrimonial", desc:"Mapeo participativo de lugares, bienes y prácticas de valor patrimonial" },
+    tipo: "detalle",
+    descripcion: "Memorias, Identidades y Crítica es el campo que investiga los procesos mediante los cuales comunidades, grupos poblacionales y territorios construyen, disputan y transmiten sus relatos culturales. Su objeto de estudio son las narrativas excluidas, los archivos de memoria, las identidades en tensión y los sistemas de significación propios de grupos históricamente marginados. Parte de una postura epistemológica comprometida: no investiga sobre las comunidades sino con ellas, reconociendo sus saberes como fuentes legítimas de conocimiento. Articula la recuperación de archivos y memorias, la crítica decolonial e intercultural, y el análisis de representaciones e identidades como vías para sustentar procesos de reparación simbólica y soberanía cultural en Colombia.",
+    fin: "Investigar y visibilizar las narrativas, memorias e identidades de grupos poblacionales excluidos o silenciados, generando conocimiento crítico que sustente procesos de reparación simbólica, reconocimiento cultural y soberanía epistémica en el contexto colombiano.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Arqueología de la Memoria y Estudios del Archivo",
+        desc: "memoria oral y escrita, archivos comunitarios, recuperación de narrativas silenciadas, historia cultural desde abajo, archivos digitales, patrimonio documental de grupos excluidos.",
+      },
+      {
+        num: 2,
+        nombre: "Epistemologías del Sur, Decoloniales e Interculturales",
+        desc: "pensamiento decolonial, soberanía cultural, saberes propios de comunidades étnicas y rurales, crítica a la colonialidad del saber, interculturalidad crítica.",
+      },
+      {
+        num: 3,
+        nombre: "Crítica Cultural y Estudios de Identidad",
+        desc: "análisis crítico de representaciones, estudios de género, raza y territorio como categorías culturales, identidades en disputa, etnografía crítica, estudios culturales aplicados a grupos poblacionales.",
+      },
     ],
     resultados: [
-      "Inventarios y registros del patrimonio cultural material e inmaterial",
-      "Archivos digitales de memorias, testimonios y fuentes históricas",
-      "Monografías, etnografías y estudios de caso patrimonial",
-      "Documentales, piezas radiales y material audiovisual de memoria",
-      "Protocolos de salvaguardia del patrimonio inmaterial",
-      "Planes especiales de salvaguardia (PES) con comunidades",
-      "Publicaciones académicas de historia del arte y cultura",
-      "Guías de manejo del patrimonio arqueológico y arquitectónico",
+      "Archivos de memoria oral y escrita, guiones museológicos y dispositivos de preservación documental comunitaria.",
+      "Monografías etnográficas críticas, ensayos y marcos teóricos desde perspectivas decoloniales e interculturales.",
+      "Análisis de representaciones culturales, estudios de identidades en disputa y cartografías simbólicas de grupos poblacionales.",
+      "Series documentales, publicaciones académicas y dispositivos artísticos que materialicen procesos de reparación y soberanía cultural, otros.",
     ],
   },
   {
     id: 4,
-    nombre: "Gestión masiva de la Información",
+    nombre: "Gestión masiva de la información",
     color: "#0A1A35",
     tint:  "#EEF3FC",
     accent:"#1A4A8A",
-    campos: [
-      "Estadísticas culturales nacionales, regionales y locales",
-      "Sistemas de información cultural: SIPA, SINIC, SIARTES, SoyCultura",
-      "Gobernanza de datos culturales: ciclo de vida, calidad y trazabilidad",
-      "Interoperabilidad y estándares de datos del sector cultural",
-      "Análisis de Big Data aplicado a la cultura y las artes",
-      "Inteligencia artificial ética aplicada a la investigación cultural",
-      "Bibliometría, cienciometría y mapas de conocimiento cultural",
-      "Infraestructura tecnológica y capacidades digitales del MinCulturas",
-    ],
-    prioridades: [
-      "Fortalecimiento del rol del MinCulturas en el Sistema Estadístico Nacional (SEN) — Ley 2335/2023",
-      "Gobernanza de datos culturales: protección datos personales — Ley 1581/2012",
-      "Interoperabilidad de sistemas SIPA, SINIC, SIARTES, SoyCultura y SIFO",
-      "Indicadores culturales armonizados con estándares OCDE y UNESCO",
-      "Datos abiertos del sector cultural: apertura, reutilización y visualización",
-      "Madurez digital del MinCulturas: diagnóstico y hoja de ruta",
-    ],
-    enfos: [
-      "Datos abiertos y principios FAIR (Findable, Accessible, Interoperable, Reusable)",
-      "Protección de datos personales y privacidad",
-      "IA ética y algoritmos responsables (UNESCO 2021, OCDE 2023)",
-      "Estándares internacionales de estadísticas culturales",
-      "Gobernanza participativa de la información",
-      "Accesibilidad digital y lenguajes claros",
-    ],
-    metodologias: [
-      { nombre:"Investigación cuantitativa y estadística", desc:"Diseño de encuestas, marcos muestrales, indicadores y series de tiempo" },
-      { nombre:"Análisis de Big Data cultural", desc:"Procesamiento de grandes volúmenes de datos de plataformas digitales y sistemas del MinCulturas" },
-      { nombre:"Minería de texto y PLN", desc:"Análisis computacional de textos, noticias, redes sociales y documentos institucionales" },
-      { nombre:"Diseño y evaluación de sistemas de información", desc:"Arquitectura de datos, auditorías de calidad, evaluación de usabilidad" },
-      { nombre:"Análisis de redes y grafos culturales", desc:"Mapeo de relaciones entre actores, instituciones y manifestaciones culturales" },
-      { nombre:"Auditorías algorítmicas", desc:"Evaluación de sesgos, equidad y transparencia en modelos de IA aplicados a cultura" },
+    tipo: "detalle",
+    descripcion: "Gestión Masiva de la Información es el campo que investiga, sistematiza y analiza datos cualitativos y cuantitativos sobre el sector cultural colombiano con el propósito de fortalecer la toma de decisiones basada en evidencia. Su apuesta central es construir una infraestructura de conocimiento sobre la cultura que sea robusta, territorializada y participativa: no solo producida desde instituciones técnicas, sino co-construida con ciudadanos, organizaciones y comunidades como productores activos de datos. Articula tres aproximaciones metodológicas: la analítica de datos y minería como motor de procesamiento e interpretación de grandes volúmenes de información cultural, la cartografía social y los SIG como herramientas para comprender las desigualdades y dinámicas territoriales del sector, y la ciencia ciudadana como mecanismo para descentralizar y democratizar la producción del dato cultural en Colombia.",
+    fin: "Consolidar una infraestructura de datos culturales robusta, territorializada y participativa que permita la planeación del sector basada en evidencia técnica y ciudadana, reduciendo las brechas de información entre territorios e instituciones.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Analítica de Datos y Minería",
+        desc: "procesamiento de grandes volúmenes de datos culturales, minería de texto y redes, visualización de datos, inteligencia artificial aplicada al sector cultural, modelos predictivos para planeación cultural, dashboards e indicadores del sector.",
+      },
+      {
+        num: 2,
+        nombre: "Cartografía Social y Sistemas de Información Geográfica (SIG)",
+        desc: "mapeo territorial de infraestructura y consumo cultural, distribución geográfica de recursos y agentes culturales, análisis espacial de brechas culturales, georeferenciación de patrimonios y prácticas, atlas culturales territoriales.",
+      },
+      {
+        num: 3,
+        nombre: "Ciencia Ciudadana",
+        desc: "producción distribuida de datos culturales por comunidades y organizaciones, observatorios ciudadanos de cultura, verificación colectiva de información cultural, plataformas de reporte y monitoreo participativo, datos abiertos co-producidos, encuestas y censos culturales participativos.",
+      },
     ],
     resultados: [
-      "Tableros de indicadores culturales (dashboards interactivos)",
-      "Bases de datos estructuradas y documentadas con metadatos",
-      "Reportes estadísticos del sector cultural colombiano",
-      "Estándares de metadatos e interoperabilidad para sistemas del MinCulturas",
-      "Protocolos de gobernanza de datos culturales",
-      "Herramientas de visualización e inteligencia de datos culturales",
-      "Evaluaciones de calidad y cobertura de sistemas de información",
+      "Bases de datos estructuradas, diccionarios de variables y modelos analíticos para la medición y seguimiento del sector cultural colombiano.",
+      "Tableros de control (dashboards), diagnósticos estadísticos territoriales e informes de tendencias para la toma de decisiones en política cultural.",
+      "Mapas georeferenciados, atlas culturales territoriales y análisis espaciales de brechas en infraestructura, consumo y agentes culturales.",
+      "Plataformas y protocolos de ciencia ciudadana para la co-producción de datos culturales, observatorios ciudadanos y reportes participativos desde los territorios, otros.",
     ],
   },
   {
     id: 5,
-    nombre: "Prácticas, experiencias y relaciones culturales",
+    nombre: "Públicos, experiencias y relaciones culturales",
     color: "#0A2A2A",
     tint:  "#E8F8F8",
     accent:"#1A7070",
-    campos: [
-      "Consumo cultural: hábitos, preferencias y brechas de acceso",
-      "Participación cultural: formas, motivaciones y barreras",
-      "Públicos y audiencias de las artes y la cultura",
-      "Relaciones interculturales, multiculturalismo y diálogo entre culturas",
-      "Cultura y bienestar subjetivo, salud mental y calidad de vida",
-      "Comunidades de práctica artística y redes culturales",
-      "Ecología cultural, sostenibilidad y relaciones con el ambiente",
-      "Mediación cultural y accesibilidad a las artes",
-      "Voluntariado, emprendimiento y trabajo cultural comunitario",
-    ],
-    prioridades: [
-      "Encuesta nacional de consumo y participación cultural (periodicidad regular)",
-      "Participación cultural de grupos históricamente excluidos y territorios rurales",
-      "Cultura y bienestar colectivo: medición de impactos en calidad de vida",
-      "Sostenibilidad de prácticas culturales comunitarias ante presiones económicas",
-      "Accesibilidad a las artes: personas con discapacidad, adultos mayores, primera infancia",
-      "Redes y ecosistemas culturales locales: cartografía y fortalecimiento",
-    ],
-    enfos: [
-      "Biocultural (cultura-naturaleza-territorio)",
-      "Territorial (diversidad regional de prácticas)",
-      "Diferencial (género, etnia, ciclo vital, discapacidad)",
-      "Intersectorial (cultura-salud, cultura-educación, cultura-deporte)",
-      "Perspectiva de derechos culturales",
-      "Enfoque de capacidades (Amartya Sen, Martha Nussbaum)",
-    ],
-    metodologias: [
-      { nombre:"Encuestas y estudios de consumo cultural", desc:"Diseño muestral representativo, cuestionarios estandarizados, comparabilidad temporal" },
-      { nombre:"Etnografía de la experiencia cultural", desc:"Observación participante de eventos, festivales, talleres y espacios culturales" },
-      { nombre:"Métodos mixtos", desc:"Triangulación de encuestas con grupos focales, entrevistas y observación" },
-      { nombre:"Análisis de redes socioculturales", desc:"Mapeo de vínculos entre actores, organizaciones y manifestaciones culturales" },
-      { nombre:"Observatorios de prácticas culturales", desc:"Monitoreo continuo de indicadores, tendencias y transformaciones en el sector" },
-      { nombre:"Estudios de audiencias y públicos", desc:"Análisis de asistencia, motivaciones, satisfacción y barreras de acceso a la cultura" },
+    tipo: "detalle",
+    descripcion: "Este campo reúne enfoques de investigación orientadas a comprender de manera integral quiénes son los públicos de la cultura, cómo participan, qué sentidos construyen en su relación con las prácticas y contenidos culturales, y de qué manera se articulan con otros actores, comunidades y ecosistemas de circulación. Se articula en tres bloques metodológicos complementarios: el primero tiene finalidad descriptiva, que permite identificar perfiles, hábitos, motivaciones y barreras; el segundo es interpretativo para profundizar en los significados, usos y formas de relación simbólica con la cultura; y el tercero se enfoca en la dimensión relacional que examina las conexiones, flujos e interacciones que sostienen la vida cultural en distintos territorios y entornos, tanto presenciales como digitales.",
+    fin: "Generar conocimiento sistemático sobre los públicos, audiencias y no-públicos de la oferta cultural colombiana, comprendiendo sus barreras de acceso y formas de apropiación, con el propósito de orientar estrategias de circulación, acceso democrático y desarrollo de públicos basadas en evidencia y no en decisiones unilaterales.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Caracterización y segmentación de públicos (descriptivo)",
+        desc: "Investigación estructurada de quiénes son los públicos, cómo son su vida cotidiana, con qué frecuencia lo hacen, qué barreras enfrentan y qué diferencias existen entre estas poblaciones según variables sociodemográficas, territoriales, motivacionales y de hábitos.",
+      },
+      {
+        num: 2,
+        nombre: "Estudios de experiencia y apropiación cultural (interpretativo)",
+        desc: "Analiza cómo los públicos interpretan, experimentan, resignifican y se apropian de los contenidos, prácticas y bienes culturales, tanto en escenarios presenciales como en entornos digitales, para comprender procesos de construcción de sentido, pertenencia e interacción cultural.",
+      },
+      {
+        num: 3,
+        nombre: "Análisis de redes, vínculos y relaciones ecosistémicas",
+        desc: "Estudia el sistema de relaciones entre audiencias, públicos, agentes, organizaciones y Estado del ecosistema cultural, identificando conexiones, flujos, nodos estratégicos y patrones de circulación para comprender cómo se configura la vida cultural, participación y colaboración en distintos territorios y escalas.",
+      },
     ],
     resultados: [
-      "Informes de participación y consumo cultural por territorios y poblaciones",
-      "Mapas de prácticas culturales y ecosistemas culturales locales",
-      "Análisis de públicos de artes escénicas, musicales, plásticas y patrimoniales",
-      "Guías metodológicas para trabajo cultural comunitario",
-      "Índices de bienestar cultural y calidad de vida",
-      "Diagnósticos de accesibilidad cultural en municipios y territorios",
-      "Recomendaciones para políticas de fomento a la participación cultural",
+      "Estudios de recepción y apropiación cultural en diferentes territorios, grupos poblacionales y contextos de diversidad étnica y social.",
+      "Perfiles, caracterizaciones y segmentaciones de audiencias de equipamientos y espacios culturales: teatros, bibliotecas, festivales y plataformas digitales.",
+      "Estudios de no-públicos que identifiquen barreras simbólicas, económicas y geográficas de acceso a la oferta cultural.",
+      "Reportes y análisis de audiencias, dashboards de participación cultural y planes estratégicos de circulación basados en datos.",
+      "Protocolos, guías metodológicas y programas evaluados de formación, mediación y desarrollo de nuevos públicos en territorios con baja oferta cultural.",
     ],
   },
   {
@@ -277,50 +190,33 @@ const AREAS = [
     color: "#301500",
     tint:  "#FFF4E5",
     accent:"#C05820",
-    campos: [
-      "Tendencias globales en cultura, artes y gestión cultural pública",
-      "Innovación en gestión cultural: nuevos modelos, herramientas y procesos",
-      "Humanidades digitales y cultura digital: expresiones, plataformas y economías",
-      "Prospectiva cultural: escenarios, futuros posibles y desafíos emergentes",
-      "Laboratorios de innovación cultural: co-creación y experimentación",
-      "Transferencia tecnológica y apropiación tecnológica en el sector cultural",
-      "Cultura e inteligencia artificial: impactos, oportunidades y riesgos",
-      "Agenda de investigación futura del MinCulturas 2025-2030",
-    ],
-    prioridades: [
-      "Agenda digital cultural del MinCulturas: hojas de ruta y capacidades",
-      "Laboratorio de innovación GEDII: diseño, metodología y primeras experiencias",
-      "Prospectiva del PNC 2024-2038: escenarios a 2030 y 2038",
-      "Cultura en la era de la inteligencia artificial: regulación, oportunidades y riesgos",
-      "Humanidades digitales: nuevas formas de investigar la cultura con tecnología",
-      "Transferencia de conocimiento: de la investigación a la política pública cultural",
-    ],
-    enfos: [
-      "Prospectivo y de futuros (futures literacy)",
-      "Innovación pública (gobierno abierto, co-diseño, experimentación)",
-      "Tecnológico y digital (humanidades digitales, IA)",
-      "Ecosistemas de conocimiento y redes de innovación",
-      "Intersectorial (cultura-ciencia-tecnología-educación)",
-      "Aprendizaje institucional y gestión del conocimiento",
-    ],
-    metodologias: [
-      { nombre:"Foresight y prospectiva estratégica", desc:"Análisis de tendencias, escenarios, visión de futuros con expertos y comunidades" },
-      { nombre:"Design thinking y co-diseño", desc:"Proceso centrado en usuarios para innovar en servicios y políticas culturales" },
-      { nombre:"Living labs y laboratorios ciudadanos", desc:"Espacios de experimentación abierta y co-creación con actores culturales" },
-      { nombre:"Investigación-acción en innovación pública", desc:"Ciclos de prototipado, prueba y mejora de intervenciones culturales" },
-      { nombre:"Análisis de tendencias (trend analysis)", desc:"Monitoreo y análisis sistemático de cambios en el entorno cultural global" },
-      { nombre:"Evaluación de impacto de innovaciones", desc:"Medición de resultados e impactos de nuevos modelos de gestión cultural" },
+    tipo: "detalle",
+    descripcion: "La Innovación Pública y Prospectiva como campo de investigación cultural examina las transformaciones en los modos de diseñar, implementar y evaluar política cultural en Colombia. Parte del reconocimiento de que el Estado no puede ser el único actor en la construcción de respuestas culturales a los desafíos contemporáneos, por lo que propone metodologías que integran el diseño especulativo y la prospectiva, el análisis riguroso de políticas públicas y los principios de gobierno abierto. Su apuesta es generar conocimiento accionable: modelos replicables, prototipos evaluables y marcos participativos que conecten la investigación con la transformación real de la gestión cultural pública.",
+    fin: "Impulsar una gobernanza cultural innovadora, participativa y basada en evidencia, capaz de anticipar futuros posibles, diseñar políticas públicas más pertinentes y transparentes, y fortalecer la colaboración entre Estado, ciudadanía y ecosistema cultural para garantizar el desarrollo sostenible de la cultura como bien común.",
+    metodologiasSombrilla: [
+      {
+        num: 1,
+        nombre: "Diseño Especulativo y de Futuros",
+        desc: "construcción de escenarios culturales futuros, prospectiva estratégica, pensamiento de futuros en políticas culturales, pensamiento sistémico, anticipación de tendencias, laboratorios de innovación pública, ficción de diseño aplicada a la gestión cultural.",
+      },
+      {
+        num: 2,
+        nombre: "Análisis de Políticas Públicas",
+        desc: "diagnóstico, formulación y evaluación de política cultural, análisis comparado de modelos de gestión, mapeo de actores e instituciones, estudios de implementación, marcos normativos y regulatorios del sector cultural, economía de la cultura.",
+      },
+      {
+        num: 3,
+        nombre: "Gobierno Abierto",
+        desc: "participación ciudadana en la co-creación de política cultural, transparencia y rendición de cuentas en gestión cultural, datos abiertos aplicados al sector cultural, plataformas de participación Estado-ciudadanía, laboratorios ciudadanos, gobernanza cultural participativa.",
+      },
     ],
     resultados: [
-      "Escenarios prospectivos para el sector cultural colombiano 2030-2038",
-      "Prototipos y modelos de innovación en servicios y políticas culturales",
-      "Guías de innovación pública aplicada a la gestión cultural",
-      "Agendas de investigación e innovación del MinCulturas",
-      "Publicaciones de divulgación digital y transmedia",
-      "Informes de tendencias globales en cultura y artes",
-      "Hoja de ruta para el laboratorio de innovación GEDII",
+      "Documentos de política (Policy Briefs) y hojas de ruta estratégicas alineadas con marcos de futuros.",
+      "Modelos de gestión cultural replicables y prototipos de servicios culturales desarrollados desde metodologías de diseño especulativo.",
+      "Plataformas, protocolos y guías de participación ciudadana para la co-creación de política cultural en clave de Gobierno Abierto.",
+      "Marcos de indicadores y marcos de evaluación para el análisis técnico de políticas públicas culturales, otros.",
     ],
-  },
+  }
 ];
 
 /* PRIORIDADES TRANSVERSALES */
@@ -414,6 +310,28 @@ function SecLabel({ children }) {
   return (
     <div style={{ fontSize:10, fontWeight:700, color:"rgba(255,255,255,0.45)", textTransform:"uppercase", letterSpacing:"1px", marginBottom:8, marginTop:16 }}>
       {children}
+
+      {/* ═══ TAB: CARACTERIZACIÓN DE ACTORES ═══ */}
+      {tabActiva === "actores" && (
+        <div style={{ padding:"28px 36px 48px" }}>
+          <div style={{ marginBottom:16 }}>
+            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>Próximamente</div>
+            <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>Caracterización de actores</h2>
+            <p style={{ margin:"10px 0 0", fontSize:13, color:P.soft, lineHeight:1.65 }}>Esta sección contendrá la caracterización de los actores del sector cultural: artistas, gestores, investigadores, comunidades, instituciones y redes. En construcción.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB: NIVELES DE VINCULACIÓN ═══ */}
+      {tabActiva === "vinculacion" && (
+        <div style={{ padding:"28px 36px 48px" }}>
+          <div style={{ marginBottom:16 }}>
+            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>Próximamente</div>
+            <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>Niveles de vinculación</h2>
+            <p style={{ margin:"10px 0 0", fontSize:13, color:P.soft, lineHeight:1.65 }}>Esta sección definirá los niveles y modalidades de vinculación entre el MinCulturas y los actores del sector cultural en procesos de investigación. En construcción.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -426,8 +344,97 @@ function SecLabelDark({ children }) {
   );
 }
 
+/* ─── Panel detallado (tipo: "detalle") ─── */
+function AreaDetallePanel({ area }) {
+  return (
+    <div style={{ animation:"fadeUp 0.3s ease both" }}>
+      {/* Header */}
+      <div style={{ background:area.color, borderRadius:"14px 14px 0 0", padding:"24px 36px 22px" }}>
+        <div style={{ fontSize:11, fontWeight:700, color:"rgba(255,255,255,0.45)", textTransform:"uppercase", letterSpacing:"1.5px", marginBottom:6 }}>
+          Área {area.id} de 6
+        </div>
+        <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(22px,2.5vw,36px)", color:P.white, textTransform:"uppercase", lineHeight:1 }}>
+          {area.nombre}
+        </h2>
+      </div>
+
+      {/* Descripción intro — full width */}
+      <div style={{ background:P.white, padding:"28px 36px 24px", borderLeft:`1px solid ${area.color}22`, borderRight:`1px solid ${area.color}22` }}>
+        <p style={{ margin:0, fontSize:14, color:P.ink, lineHeight:1.75, maxWidth:900 }}>
+          {area.descripcion}
+        </p>
+      </div>
+
+      {/* 3 columnas: El fin | Metodologías sombrilla | Resultados esperados */}
+      <div style={{
+        display:"grid", gridTemplateColumns:"280px 1fr 320px", gap:0,
+        background:P.white, border:`1px solid ${area.color}22`,
+        borderTop:`1px solid ${P.tint}`, borderRadius:"0 0 14px 14px", overflow:"hidden",
+      }} className="detalle-grid">
+
+        {/* Col 1 — El fin */}
+        <div style={{ padding:"28px 24px 28px 36px", borderRight:`1px solid ${P.tint}` }}>
+          <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:14 }}>
+            <span style={{ fontSize:18, color:P.accent }}>★</span>
+            <span style={{ fontSize:12, fontWeight:700, color:P.ink, textTransform:"uppercase", letterSpacing:"0.8px" }}>El fin</span>
+          </div>
+          <p style={{ margin:0, fontSize:13, color:P.ink, lineHeight:1.75 }}>
+            {area.fin}
+          </p>
+        </div>
+
+        {/* Col 2 — Metodologías sombrilla */}
+        <div style={{ padding:"28px 28px", borderRight:`1px solid ${P.tint}` }}>
+          <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:18 }}>
+            <span style={{ fontSize:18, color:P.accent }}>★</span>
+            <span style={{ fontSize:12, fontWeight:700, color:P.ink, textTransform:"uppercase", letterSpacing:"0.8px" }}>Metodologías sombrilla</span>
+          </div>
+          <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
+            {area.metodologiasSombrilla.map((m) => (
+              <div key={m.num} style={{ display:"flex", gap:14 }}>
+                <div style={{
+                  width:28, height:28, borderRadius:"50%", flexShrink:0,
+                  background:area.color, color:P.white,
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:14,
+                  marginTop:2,
+                }}>{m.num}</div>
+                <div>
+                  <div style={{ fontSize:13, fontWeight:700, color:P.ink, marginBottom:4, lineHeight:1.3 }}>
+                    {m.nombre}
+                  </div>
+                  <div style={{ fontSize:12.5, color:P.soft, lineHeight:1.65 }}>
+                    {m.desc}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Col 3 — Resultados esperados */}
+        <div style={{ padding:"28px 36px 28px 28px" }}>
+          <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:14 }}>
+            <span style={{ fontSize:18, color:P.accent }}>★</span>
+            <span style={{ fontSize:12, fontWeight:700, color:P.ink, textTransform:"uppercase", letterSpacing:"0.8px" }}>Resultados esperados</span>
+          </div>
+          <ul style={{ listStyle:"none", margin:0, padding:0, display:"flex", flexDirection:"column", gap:10 }}>
+            {area.resultados.map((r,i) => (
+              <li key={i} style={{ fontSize:13, color:P.ink, lineHeight:1.65, paddingLeft:16, position:"relative" }}>
+                <span style={{ position:"absolute", left:0, color:area.accent, fontWeight:700 }}>→</span>
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* Panel expandido de un Área */
 function AreaPanel({ area }) {
+  if (area.tipo === "detalle") return <AreaDetallePanel area={area} />;
   return (
     <div style={{ animation:"fadeUp 0.3s ease both" }}>
       {/* Header */}
@@ -578,7 +585,7 @@ function FasePanel({ fase }) {
    COMPONENTE PRINCIPAL
    ══════════════════════════════════════════════════════════ */
 export default function ArquitecturaMetodologica() {
-  const [tabActiva,   setTabActiva]   = useState("areas");
+  const [tabActiva,   setTabActiva]   = useState("campos");
   const [areaActiva,  setAreaActiva]  = useState(1);
   const [faseActiva,  setFaseActiva]  = useState(1);
   const [lineaActiva, setLineaActiva] = useState(null);
@@ -595,6 +602,9 @@ export default function ArquitecturaMetodologica() {
         .area-btn { border:none; cursor:pointer; font-family:inherit; transition:all 0.2s ease; }
         .area-btn:hover { filter:brightness(1.05); transform:translateY(-1px); }
         .area-grid-4 { grid-template-columns: repeat(4,1fr); }
+        .detalle-grid { grid-template-columns: 280px 1fr 320px; }
+        @media (max-width: 1100px) { .detalle-grid { grid-template-columns: 1fr 1fr !important; } }
+        @media (max-width: 700px)  { .detalle-grid { grid-template-columns: 1fr !important; } }
         .fase-panel-grid { grid-template-columns: 2fr 1.5fr 1fr; }
         .area-sel-grid { display:grid; grid-template-columns: repeat(6,1fr); gap:8px; }
         .fase-sel-grid { display:grid; grid-template-columns: repeat(6,1fr); gap:8px; }
@@ -648,10 +658,12 @@ export default function ArquitecturaMetodologica() {
       {/* ═══ TABS ═══ */}
       <div style={{ background:P.white, borderBottom:`1px solid ${P.tint}`, padding:"0 40px", display:"flex", gap:0, overflowX:"auto" }}>
         {[
-          { key:"areas",    label:"Áreas de investigación" },
-          { key:"lineas",   label:"Líneas transversales" },
-          { key:"ciclo",    label:"Ciclo metodológico" },
-          { key:"transv",   label:"Prioridades transversales" },
+          { key:"campos",      label:"Campos de investigación" },
+          { key:"dimensiones", label:"Dimensiones de impacto" },
+          { key:"actores",     label:"Caracterización de actores" },
+          { key:"vinculacion", label:"Niveles de vinculación" },
+          { key:"marco",       label:"Marco I+D" },
+          { key:"innovacion",  label:"Innovación" },
         ].map(t => (
           <button key={t.key} className="arq-tab"
             onClick={() => setTabActiva(t.key)}
@@ -661,7 +673,7 @@ export default function ArquitecturaMetodologica() {
       </div>
 
       {/* ═══ TAB 1: ÁREAS DE INVESTIGACIÓN ═══ */}
-      {tabActiva === "areas" && (
+      {tabActiva === "campos" && (
         <div style={{ padding:"28px 36px 48px" }}>
           {/* Encabezado */}
           <div style={{ marginBottom:20 }}>
@@ -690,7 +702,9 @@ export default function ArquitecturaMetodologica() {
               >
                 <div style={{ fontSize:20, marginBottom:6, color: areaActiva===a.id ? "rgba(255,255,255,0.7)" : a.accent }}>{a.id}</div>
                 <div style={{ fontSize:11, fontWeight:700, color: areaActiva===a.id ? P.white : P.ink, lineHeight:1.3 }}>{a.nombre}</div>
-                <div style={{ fontSize:10, color: areaActiva===a.id ? "rgba(255,255,255,0.5)" : P.soft, marginTop:4 }}>{a.campos.length} campos</div>
+                <div style={{ fontSize:10, color: areaActiva===a.id ? "rgba(255,255,255,0.5)" : P.soft, marginTop:4 }}>
+                  {a.tipo === "detalle" ? `${a.metodologiasSombrilla.length} metodologías` : `${a.campos.length} campos`}
+                </div>
               </button>
             ))}
           </div>
@@ -701,7 +715,7 @@ export default function ArquitecturaMetodologica() {
       )}
 
       {/* ═══ TAB 2: LÍNEAS TRANSVERSALES ═══ */}
-      {tabActiva === "lineas" && (
+      {tabActiva === "dimensiones" && (
         <div style={{ padding:"28px 36px 48px" }}>
           <div style={{ marginBottom:24 }}>
             <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
@@ -799,7 +813,7 @@ export default function ArquitecturaMetodologica() {
       )}
 
       {/* ═══ TAB 3: CICLO METODOLÓGICO ═══ */}
-      {tabActiva === "ciclo" && (
+      {tabActiva === "marco" && (
         <div style={{ padding:"28px 36px 48px" }}>
           <div style={{ marginBottom:22 }}>
             <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
@@ -851,7 +865,7 @@ export default function ArquitecturaMetodologica() {
       )}
 
       {/* ═══ TAB 4: PRIORIDADES TRANSVERSALES ═══ */}
-      {tabActiva === "transv" && (
+      {tabActiva === "innovacion" && (
         <div style={{ padding:"28px 36px 48px" }}>
           <div style={{ marginBottom:24 }}>
             <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
