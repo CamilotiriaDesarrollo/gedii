@@ -810,53 +810,6 @@ export default function ArquitecturaMetodologica() {
             </div>
           </div>
 
-          {/* ── LÍNEAS TRANSVERSALES ── */}
-          <div>
-            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>Estructura cruzada · 5 líneas</div>
-            <h2 style={{ margin:"0 0 6px", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
-              Líneas Transversales de Investigación
-            </h2>
-            <p style={{ margin:"0 0 20px", fontSize:12.5, color:P.soft, lineHeight:1.6 }}>
-              Dimensiones analíticas que articulan horizontalmente las 6 áreas de investigación.
-            </p>
-            <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-              {LINEAS.map(l => (
-                <div key={l.id}
-                  onClick={() => setLineaActiva(lineaActiva===l.id ? null : l.id)}
-                  style={{ background:"#FFF", borderRadius:10, padding:"16px 20px", border:`1.5px solid ${lineaActiva===l.id ? P.mid : P.tint}`, cursor:"pointer", transition:"all 0.18s", boxShadow: lineaActiva===l.id ? `0 3px 14px ${P.mid}22` : "none" }}
-                >
-                  <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-                    <div style={{ width:32, height:32, borderRadius:"50%", background: lineaActiva===l.id ? P.mid : P.tint, color: lineaActiva===l.id ? "#FFF" : P.mid, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:16, flexShrink:0 }}>{l.id}</div>
-                    <div style={{ flex:1 }}>
-                      <span style={{ fontWeight:700, fontSize:13.5, color: lineaActiva===l.id ? P.ink : P.deep }}>{l.nombre}</span>
-                      {lineaActiva !== l.id && <span style={{ fontSize:12, color:P.soft, marginLeft:12 }}>{l.desc}</span>}
-                    </div>
-                    <span style={{ color:P.soft, fontSize:14, flexShrink:0 }}>{lineaActiva===l.id ? "▲" : "▼"}</span>
-                  </div>
-                  {lineaActiva===l.id && (
-                    <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${P.tint}`, animation:"fadeUp 0.2s ease both" }}>
-                      <p style={{ margin:"0 0 14px", fontSize:13, color:P.soft, lineHeight:1.65 }}>{l.desc}</p>
-                      <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:10 }}>Cómo se expresa en cada área</div>
-                      <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:8 }}>
-                        {AREAS.map(a => (
-                          <div key={a.id} style={{ background:P.bg, borderRadius:8, padding:"10px 12px", borderLeft:`3px solid ${a.accent}` }}>
-                            <div style={{ fontSize:11, fontWeight:700, color:P.ink, marginBottom:2 }}>{a.nombre}</div>
-                            <div style={{ fontSize:11, color:P.soft, lineHeight:1.4 }}>
-                              {l.id==="A" && "Análisis del contexto histórico, político y socioeconómico del campo cultural correspondiente."}
-                              {l.id==="B" && "Mapeo y caracterización de actores, comunidades, redes e instituciones propias de cada área."}
-                              {l.id==="C" && "Estudio de los procesos de creación, circulación, consumo y apropiación específicos del área."}
-                              {l.id==="D" && "Evaluación de cambios generados por políticas e intervenciones en cada campo cultural."}
-                              {l.id==="E" && "Identificación de tendencias emergentes y escenarios futuros propios de cada área."}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
 
         </div>
       )}
