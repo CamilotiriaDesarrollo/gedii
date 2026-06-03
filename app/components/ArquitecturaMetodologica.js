@@ -701,11 +701,40 @@ export default function ArquitecturaMetodologica() {
       {tabActiva === "dimensiones" && (
         <div style={{ padding:"20px 36px 48px" }}>
 
+          {/* ── TRANSVERSAL arriba ── */}
+          <div style={{ borderRadius:14, overflow:"hidden", border:"1px solid #C8E6C9", marginBottom:24 }}>
+            <div style={{ background:"#C8E6C9", padding:"13px 24px" }}>
+              <span style={{ fontSize:12, fontWeight:700, color:"#1B5E20", textTransform:"uppercase", letterSpacing:"0.8px" }}>
+                TRANSVERSAL:&nbsp;&nbsp;Impacto en la Gestión Pública y Normativa
+              </span>
+            </div>
+            <div style={{ background:"#FFF", padding:"22px 24px 24px" }}>
+              <p style={{ margin:"0 0 20px", fontSize:13, color:"#1A0A3D", lineHeight:1.75 }}>
+                La investigación produce conocimiento que se traduce en instrumentos de política pública, marcos normativos o decisiones de gestión. No es el nivel más alto de impacto: es una dimensión que puede articularse con cualquiera de las cuatro dimensiones sociales según el alcance del proyecto.
+              </p>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }} className="dim-grid">
+                <div>
+                  <div style={{ fontSize:11.5, fontWeight:700, color:"#1A0A3D", marginBottom:6 }}>Indicador de producto:</div>
+                  <p style={{ margin:0, fontSize:13, color:"#9080B8", lineHeight:1.7 }}>
+                    número de policy briefs, hojas de ruta, marcos normativos o instrumentos de planeación derivados directamente de resultados de investigación, con evidencia de uso institucional.
+                  </p>
+                </div>
+                <div>
+                  <div style={{ fontSize:11.5, fontWeight:700, color:"#1A0A3D", marginBottom:8 }}>Campos relacionados</div>
+                  {[{num:4,nombre:"Gestión masiva de información"},{num:5,nombre:"Estudios de públicos y acceso cultural"},{num:6,nombre:"Innovación pública y prospectiva"}].map(c => (
+                    <div key={c.num} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
+                      <span style={{ fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:13, color:"#9080B8", minWidth:52 }}>Campo {c.num}</span>
+                      <span style={{ width:1, height:14, background:"#D0C8E8", flexShrink:0 }}/>
+                      <span style={{ fontSize:13, color:"#1A0A3D" }}>{c.nombre}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* ── TÍTULO ── */}
           <div style={{ marginBottom:22 }}>
-            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
-              Marco de evaluación · Dimensiones sociales
-            </div>
             <h2 style={{ margin:"0 0 4px", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
               Dimensiones de impacto social
             </h2>
@@ -778,8 +807,8 @@ export default function ArquitecturaMetodologica() {
             ))}
           </div>
 
-                    {/* ── TRANSVERSAL ── */}
-          <div style={{ borderRadius:14, overflow:"hidden", border:"1px solid #C8E6C9", marginBottom:32 }}>
+                    {/* ── TRANSVERSAL (moved to top) ── */}
+          <div style={{ display:"none" }}>
             <div style={{ background:"#C8E6C9", padding:"13px 24px" }}>
               <span style={{ fontSize:12, fontWeight:700, color:"#1B5E20", textTransform:"uppercase", letterSpacing:"0.8px" }}>
                 TRANSVERSAL:&nbsp;&nbsp;Impacto en la Gestión Pública y Normativa
