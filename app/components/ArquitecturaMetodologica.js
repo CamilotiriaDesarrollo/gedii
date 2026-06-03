@@ -589,6 +589,7 @@ export default function ArquitecturaMetodologica() {
   const [areaActiva,  setAreaActiva]  = useState(1);
   const [faseActiva,  setFaseActiva]  = useState(1);
   const [lineaActiva, setLineaActiva] = useState(null);
+  const [dimActiva,   setDimActiva]   = useState(null);
 
   const area = AREAS.find(a => a.id === areaActiva);
   const fase = FASES.find(f => f.id === faseActiva);
@@ -714,57 +715,70 @@ export default function ArquitecturaMetodologica() {
           </div>
 
           {/* ── 4 DIMENSIONES ── */}
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:32 }} className="dim4-grid">
-
+          <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:32 }}>
             {[
-              { n:1, titulo:"Impacto informativo y de visibilidad", sub:"Acceso al conocimiento", color:"#4472C4", border:"#BDD7EE",
+              { n:"1", titulo:"Impacto informativo y de visibilidad", sub:"Acceso al conocimiento",
                 desc:"El proyecto produce datos, descripciones o diagnósticos que antes no existían o no estaban disponibles. La función es hacer visible lo que estaba oculto o disperso.",
                 indicador:"Disponibilidad pública de los datos o resultados producidos, y nivel de consulta o uso por parte de instituciones y ciudadanía.",
                 campos:["Campo 4 · Gestión Masiva de la Información","Campo 5 · Públicos, Experiencias y Relaciones Culturales"],
                 pregunta:"¿Qué sabemos ahora que no sabíamos antes? ¿Quién tiene acceso a esa información?" },
-              { n:2, titulo:"Impacto de sentido y comprensión", sub:"Diálogo de saberes", color:"#2E75B6", border:"#B4C6E7",
+              { n:"2", titulo:"Impacto de sentido y comprensión", sub:"Diálogo de saberes",
                 desc:"El proyecto interpreta fenómenos culturales y pone en diálogo diferentes formas de saber. Genera marcos comprensivos que enriquecen la manera en que comunidades e instituciones entienden su realidad.",
                 indicador:"Nuevos marcos interpretativos o aportes conceptuales reconocidos y apropiados por comunidades, instituciones o comunidades académicas relevantes.",
                 campos:["Campo 1 · Poéticas, lenguajes y estéticas","Campo 3 · Memorias, identidades y críticas"],
                 pregunta:"¿Cómo cambió la manera en que una comunidad, institución o campo disciplinar comprende un fenómeno cultural?" },
-              { n:3, titulo:"Impacto en la praxis y apropiación social", sub:"Uso y circulación", color:"#548235", border:"#A9D18E",
+              { n:"3", titulo:"Impacto en la praxis y apropiación social", sub:"Uso y circulación",
                 desc:"El conocimiento se convierte en herramienta de transformación: soluciones implementadas, protocolos adoptados, procesos artísticos que modifican dinámicas territoriales. El tránsito es del saber al hacer.",
                 indicador:"Soluciones, metodologías o procesos implementados y adoptados por comunidades u organizaciones en respuesta directa a los resultados de investigación.",
                 campos:["Campo 2 · Transformación social y agencia cultural","Campo 6 · Innovación Pública y Prospectiva"],
                 pregunta:"¿Qué cambió en la forma de actuar, organizar o intervenir en un territorio gracias a esta investigación?" },
-              { n:4, titulo:"Autonomía de los agentes culturales", sub:"Agenciamiento", color:"#C55A11", border:"#F4B183",
+              { n:"4", titulo:"Autonomía de los agentes culturales", sub:"Agenciamiento",
                 desc:"Las comunidades no son objeto del estudio sino sujetos de investigación con capacidad propia. Generan sus preguntas, controlan sus métodos y usan sus resultados para incidir en agendas regionales y políticas.",
                 indicador:"Sostenibilidad de procesos de investigación propios y capacidad demostrada de incidencia comunitaria en agendas culturales, sociales o políticas.",
                 campos:["Campo 2 · Transformación social y agencia cultural","Campo 3 · Memorias, identidades y críticas"],
                 pregunta:"¿La comunidad puede ahora investigar su propia realidad y usar ese conocimiento para incidir políticamente?" },
             ].map(d => (
-              <div key={d.n} style={{ borderRadius:12, overflow:"hidden", border:`1px solid ${d.border}`, display:"flex", flexDirection:"column" }}>
-                <div style={{ background:d.color, padding:"14px 16px" }}>
-                  <div style={{ fontSize:10, fontWeight:700, color:"rgba(255,255,255,0.7)", textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:4 }}>Dimensión {d.n}</div>
-                  <div style={{ fontSize:13, fontWeight:900, color:"#FFF", lineHeight:1.3, fontFamily:"'Barlow Condensed',Impact,sans-serif", textTransform:"uppercase" }}>{d.titulo}</div>
-                  <div style={{ fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.8)", marginTop:3 }}>{d.sub}</div>
+              <div key={d.n}
+                onClick={() => setDimActiva(dimActiva===d.n ? null : d.n)}
+                style={{ background:"#FFF", borderRadius:10, padding:"16px 20px", border:`1.5px solid ${dimActiva===d.n ? P.mid : P.tint}`, cursor:"pointer", transition:"all 0.18s", boxShadow: dimActiva===d.n ? `0 3px 14px ${P.mid}22` : "none" }}
+              >
+                <div style={{ display:"flex", alignItems:"center", gap:14 }}>
+                  <div style={{ width:32, height:32, borderRadius:"50%", background: dimActiva===d.n ? P.mid : P.tint, color: dimActiva===d.n ? "#FFF" : P.mid, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:16, flexShrink:0 }}>{d.n}</div>
+                  <div style={{ flex:1 }}>
+                    <span style={{ fontWeight:700, fontSize:13.5, color: dimActiva===d.n ? P.ink : P.deep }}>{d.titulo}</span>
+                    {dimActiva !== d.n && <span style={{ fontSize:12, color:P.soft, marginLeft:12 }}>{d.sub}</span>}
+                  </div>
+                  <span style={{ color:P.soft, fontSize:14, flexShrink:0 }}>{dimActiva===d.n ? "▲" : "▼"}</span>
                 </div>
-                <div style={{ background:"#FFF", padding:"16px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
-                  <p style={{ margin:0, fontSize:12.5, color:"#1A0A3D", lineHeight:1.7 }}>{d.desc}</p>
-                  <div>
-                    <div style={{ fontSize:11, fontWeight:700, color:"#1A0A3D", marginBottom:4 }}>Indicador:</div>
-                    <p style={{ margin:0, fontSize:12, color:"#9080B8", lineHeight:1.65 }}>{d.indicador}</p>
+                {dimActiva===d.n && (
+                  <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${P.tint}`, animation:"fadeUp 0.2s ease both" }}>
+                    <p style={{ margin:"0 0 16px", fontSize:13, color:P.soft, lineHeight:1.65, fontStyle:"italic" }}>{d.sub}</p>
+                    <p style={{ margin:"0 0 16px", fontSize:13, color:P.ink, lineHeight:1.7 }}>{d.desc}</p>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16 }}>
+                      <div>
+                        <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:6 }}>Indicador</div>
+                        <p style={{ margin:0, fontSize:12.5, color:P.ink, lineHeight:1.65 }}>{d.indicador}</p>
+                      </div>
+                      <div>
+                        <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:6 }}>Campos relacionados</div>
+                        {d.campos.map((c,i) => (
+                          <div key={i} style={{ fontSize:12.5, color:P.ink, lineHeight:1.6, paddingLeft:12, position:"relative", marginBottom:4 }}>
+                            <span style={{ position:"absolute", left:0, color:P.mid, fontSize:10 }}>→</span>{c}
+                          </div>
+                        ))}
+                      </div>
+                      <div>
+                        <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:6 }}>Pregunta orientadora</div>
+                        <p style={{ margin:0, fontSize:12.5, color:P.ink, lineHeight:1.65, fontStyle:"italic" }}>{d.pregunta}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ background:"#F4F2FC", borderRadius:8, padding:"10px 12px", border:"1px solid #EDE6FA" }}>
-                    <div style={{ fontSize:11, fontWeight:700, color:"#9080B8", marginBottom:5, textTransform:"uppercase", letterSpacing:"0.5px" }}>Campos relacionados</div>
-                    {d.campos.map((c,i) => <div key={i} style={{ fontSize:12, color:"#1A0A3D", lineHeight:1.6 }}>{c}</div>)}
-                  </div>
-                  <div style={{ marginTop:"auto", paddingTop:10, borderTop:"1px solid #EDE6FA" }}>
-                    <div style={{ fontSize:11, fontWeight:700, color:d.color, marginBottom:4 }}>Pregunta orientadora</div>
-                    <p style={{ margin:0, fontSize:12, color:"#9080B8", lineHeight:1.6, fontStyle:"italic" }}>{d.pregunta}</p>
-                  </div>
-                </div>
+                )}
               </div>
             ))}
-
           </div>
 
-          {/* ── TRANSVERSAL ── */}
+                    {/* ── TRANSVERSAL ── */}
           <div style={{ borderRadius:14, overflow:"hidden", border:"1px solid #C8E6C9", marginBottom:32 }}>
             <div style={{ background:"#C8E6C9", padding:"13px 24px" }}>
               <span style={{ fontSize:12, fontWeight:700, color:"#1B5E20", textTransform:"uppercase", letterSpacing:"0.8px" }}>
