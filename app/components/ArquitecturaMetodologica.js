@@ -622,37 +622,31 @@ export default function ArquitecturaMetodologica() {
           .fase-sel-grid  { grid-template-columns: repeat(2,1fr) !important; }
         }
         .trans-card:hover { background: ${P.tint} !important; }
+        .dim-grid { grid-template-columns: 1fr 1fr; }
+        @media (max-width: 700px) { .dim-grid { grid-template-columns: 1fr !important; } }
         .arq-matrix-tbl tr:hover td { background: rgba(74,46,138,0.04); }
       `}</style>
 
       {/* ═══ HERO ═══ */}
       <div style={{
-        background:`linear-gradient(135deg, ${P.ink} 0%, ${P.deep} 50%, #3D2880 100%)`,
-        padding:"44px 40px 36px", position:"relative", overflow:"hidden",
+        background:"linear-gradient(135deg, rgba(26,10,61,0.82) 0%, rgba(45,22,88,0.78) 100%)",
+        backgroundColor: P.bg,
+        padding:"22px 40px 20px",
+        borderBottom:`1px solid rgba(74,46,138,0.15)`,
       }}>
-        <div style={{ position:"absolute", right:-60, top:-60, width:320, height:320, borderRadius:"50%", border:"1px solid rgba(255,255,255,0.06)" }}/>
-        <div style={{ position:"absolute", right:40, top:30, width:160, height:160, borderRadius:"50%", border:"1px solid rgba(255,255,255,0.08)" }}/>
-        <div style={{ position:"relative", zIndex:1 }}>
-          <div style={{ fontSize:11, fontWeight:700, color:"rgba(255,255,255,0.45)", textTransform:"uppercase", letterSpacing:"2px", marginBottom:10 }}>
-            Sistema GEDII · Marco metodológico
-          </div>
-          <h1 style={{ margin:"0 0 14px", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(28px,4vw,50px)", color:P.white, textTransform:"uppercase", lineHeight:0.95, letterSpacing:"-0.5px" }}>
-            Arquitectura<br/><span style={{ color:P.accent }}>Metodológica</span>
-          </h1>
-          <p style={{ fontSize:"clamp(12px,1.1vw,14px)", color:"rgba(255,255,255,0.7)", lineHeight:1.7, margin:"0 0 24px", maxWidth:660 }}>
-            Marco integrado para el diseño, ejecución y comunicación de investigaciones culturales del
-            Ministerio de las Culturas, las Artes y los Saberes. Articula el rigor técnico con el diálogo
-            de saberes, el enfoque territorial y los principios del Plan Nacional de Cultura 2024–2038.
-          </p>
-          <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
-            {[["6","Áreas de investigación"],["8","Enfoques metodológicos"],["5","Líneas transversales"],["8","Principios éticos"],["PNC","2024–2038"]].map(([v,l]) => (
-              <div key={v} style={{ background:"rgba(255,255,255,0.1)", border:"1px solid rgba(255,255,255,0.16)", borderRadius:8, padding:"7px 14px", display:"flex", alignItems:"center", gap:9 }}>
-                <span style={{ fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:20, color:P.accent, lineHeight:1 }}>{v}</span>
-                <span style={{ fontSize:11, color:"rgba(255,255,255,0.65)", lineHeight:1.3 }}>{l}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <h1 style={{
+          margin:0,
+          fontFamily:"'Barlow Condensed',Impact,sans-serif",
+          fontWeight:900,
+          fontSize:"clamp(26px,3vw,42px)",
+          color:P.white,
+          textTransform:"uppercase",
+          letterSpacing:"-0.5px",
+          lineHeight:1,
+          whiteSpace:"nowrap",
+        }}>
+          Arquitectura&nbsp;<span style={{ color:P.accent }}>Metodológica</span>
+        </h1>
       </div>
 
       {/* ═══ TABS ═══ */}
@@ -674,19 +668,7 @@ export default function ArquitecturaMetodologica() {
 
       {/* ═══ TAB 1: ÁREAS DE INVESTIGACIÓN ═══ */}
       {tabActiva === "campos" && (
-        <div style={{ padding:"28px 36px 48px" }}>
-          {/* Encabezado */}
-          <div style={{ marginBottom:20 }}>
-            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
-              Estructura principal · 6 áreas
-            </div>
-            <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
-              Áreas y Campos de Investigación Cultural
-            </h2>
-            <p style={{ margin:"6px 0 0", fontSize:12.5, color:P.soft, lineHeight:1.6 }}>
-              Selecciona un área para ver todos sus campos, prioridades, enfoques metodológicos y resultados esperados.
-            </p>
-          </div>
+        <div style={{ padding:"20px 36px 48px" }}>
 
           {/* Selector de áreas — chips grandes */}
           <div className="area-sel-grid" style={{ marginBottom:20 }}>
@@ -714,101 +696,154 @@ export default function ArquitecturaMetodologica() {
         </div>
       )}
 
-      {/* ═══ TAB 2: LÍNEAS TRANSVERSALES ═══ */}
+      {/* ═══ TAB 2: DIMENSIONES DE IMPACTO ═══ */}
       {tabActiva === "dimensiones" && (
-        <div style={{ padding:"28px 36px 48px" }}>
-          <div style={{ marginBottom:24 }}>
+        <div style={{ padding:"20px 36px 48px" }}>
+
+          {/* ── TÍTULO ── */}
+          <div style={{ marginBottom:22 }}>
             <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>
-              Estructura cruzada · 5 líneas
+              Marco de evaluación · Dimensiones sociales
             </div>
-            <h2 style={{ margin:0, fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
-              Líneas Transversales de Investigación
+            <h2 style={{ margin:"0 0 4px", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
+              Dimensiones de impacto social
             </h2>
-            <p style={{ margin:"6px 0 0", fontSize:12.5, color:P.soft, lineHeight:1.6 }}>
-              Dimensiones analíticas que articulan horizontalmente las 6 áreas de investigación.
+            <p style={{ margin:0, fontSize:12.5, color:P.soft, lineHeight:1.5 }}>
+              Progresivas pero no excluyentes — una investigación puede alcanzar varias dimensiones simultáneamente.
             </p>
           </div>
 
-          {/* Líneas */}
-          <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
-            {LINEAS.map(l => (
-              <div key={l.id}
-                onClick={() => setLineaActiva(lineaActiva===l.id ? null : l.id)}
-                style={{
-                  background:P.white, borderRadius:12, padding:"18px 22px",
-                  border:`1.5px solid ${lineaActiva===l.id ? P.mid : P.tint}`,
-                  cursor:"pointer", transition:"all 0.18s",
-                  boxShadow: lineaActiva===l.id ? `0 3px 14px ${P.mid}22` : "0 1px 4px rgba(0,0,0,0.04)",
-                }}
-              >
-                <div style={{ display:"flex", alignItems:"flex-start", gap:14 }}>
-                  <div style={{ width:36, height:36, borderRadius:"50%", background: lineaActiva===l.id ? P.mid : P.tint, color: lineaActiva===l.id ? P.white : P.mid, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:18, flexShrink:0 }}>{l.id}</div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontWeight:700, fontSize:14, color: lineaActiva===l.id ? P.ink : P.deep, marginBottom:4 }}>{l.nombre}</div>
-                    <div style={{ fontSize:12.5, color:P.soft, lineHeight:1.6 }}>{l.desc}</div>
-                  </div>
-                  <div style={{ color:P.soft, fontSize:18, flexShrink:0, marginTop:4 }}>{lineaActiva===l.id ? "▲" : "▼"}</div>
-                </div>
+          {/* ── 4 DIMENSIONES ── */}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:32 }} className="dim4-grid">
 
-                {lineaActiva===l.id && (
-                  <div style={{ marginTop:18, paddingTop:16, borderTop:`1px solid ${P.tint}`, animation:"fadeUp 0.2s ease both" }}>
-                    <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:12 }}>
-                      Cómo se expresa en cada área de investigación
-                    </div>
-                    <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:10 }}>
-                      {AREAS.map(a => (
-                        <div key={a.id} style={{ background:P.bg, borderRadius:8, padding:"10px 14px", borderLeft:`3px solid ${a.accent}` }}>
-                          <div style={{ fontSize:11, fontWeight:700, color:P.ink, marginBottom:3 }}>{a.nombre}</div>
-                          <div style={{ fontSize:11, color:P.soft, lineHeight:1.45 }}>
-                            {l.id==="A" && "Análisis del contexto histórico, político y socioeconómico del campo cultural correspondiente."}
-                            {l.id==="B" && "Mapeo y caracterización de actores, comunidades, redes e instituciones propias de cada área."}
-                            {l.id==="C" && "Estudio de los procesos de creación, circulación, consumo y apropiación específicos del área."}
-                            {l.id==="D" && "Evaluación de cambios generados por políticas e intervenciones en cada campo cultural."}
-                            {l.id==="E" && "Identificación de tendencias emergentes y escenarios futuros propios de cada área."}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+            {[
+              { n:1, titulo:"Impacto informativo y de visibilidad", sub:"Acceso al conocimiento", color:"#4472C4", border:"#BDD7EE",
+                desc:"El proyecto produce datos, descripciones o diagnósticos que antes no existían o no estaban disponibles. La función es hacer visible lo que estaba oculto o disperso.",
+                indicador:"Disponibilidad pública de los datos o resultados producidos, y nivel de consulta o uso por parte de instituciones y ciudadanía.",
+                campos:["Campo 4 · Gestión Masiva de la Información","Campo 5 · Públicos, Experiencias y Relaciones Culturales"],
+                pregunta:"¿Qué sabemos ahora que no sabíamos antes? ¿Quién tiene acceso a esa información?" },
+              { n:2, titulo:"Impacto de sentido y comprensión", sub:"Diálogo de saberes", color:"#2E75B6", border:"#B4C6E7",
+                desc:"El proyecto interpreta fenómenos culturales y pone en diálogo diferentes formas de saber. Genera marcos comprensivos que enriquecen la manera en que comunidades e instituciones entienden su realidad.",
+                indicador:"Nuevos marcos interpretativos o aportes conceptuales reconocidos y apropiados por comunidades, instituciones o comunidades académicas relevantes.",
+                campos:["Campo 1 · Poéticas, lenguajes y estéticas","Campo 3 · Memorias, identidades y críticas"],
+                pregunta:"¿Cómo cambió la manera en que una comunidad, institución o campo disciplinar comprende un fenómeno cultural?" },
+              { n:3, titulo:"Impacto en la praxis y apropiación social", sub:"Uso y circulación", color:"#548235", border:"#A9D18E",
+                desc:"El conocimiento se convierte en herramienta de transformación: soluciones implementadas, protocolos adoptados, procesos artísticos que modifican dinámicas territoriales. El tránsito es del saber al hacer.",
+                indicador:"Soluciones, metodologías o procesos implementados y adoptados por comunidades u organizaciones en respuesta directa a los resultados de investigación.",
+                campos:["Campo 2 · Transformación social y agencia cultural","Campo 6 · Innovación Pública y Prospectiva"],
+                pregunta:"¿Qué cambió en la forma de actuar, organizar o intervenir en un territorio gracias a esta investigación?" },
+              { n:4, titulo:"Autonomía de los agentes culturales", sub:"Agenciamiento", color:"#C55A11", border:"#F4B183",
+                desc:"Las comunidades no son objeto del estudio sino sujetos de investigación con capacidad propia. Generan sus preguntas, controlan sus métodos y usan sus resultados para incidir en agendas regionales y políticas.",
+                indicador:"Sostenibilidad de procesos de investigación propios y capacidad demostrada de incidencia comunitaria en agendas culturales, sociales o políticas.",
+                campos:["Campo 2 · Transformación social y agencia cultural","Campo 3 · Memorias, identidades y críticas"],
+                pregunta:"¿La comunidad puede ahora investigar su propia realidad y usar ese conocimiento para incidir políticamente?" },
+            ].map(d => (
+              <div key={d.n} style={{ borderRadius:12, overflow:"hidden", border:`1px solid ${d.border}`, display:"flex", flexDirection:"column" }}>
+                <div style={{ background:d.color, padding:"14px 16px" }}>
+                  <div style={{ fontSize:10, fontWeight:700, color:"rgba(255,255,255,0.7)", textTransform:"uppercase", letterSpacing:"0.8px", marginBottom:4 }}>Dimensión {d.n}</div>
+                  <div style={{ fontSize:13, fontWeight:900, color:"#FFF", lineHeight:1.3, fontFamily:"'Barlow Condensed',Impact,sans-serif", textTransform:"uppercase" }}>{d.titulo}</div>
+                  <div style={{ fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.8)", marginTop:3 }}>{d.sub}</div>
+                </div>
+                <div style={{ background:"#FFF", padding:"16px", flex:1, display:"flex", flexDirection:"column", gap:12 }}>
+                  <p style={{ margin:0, fontSize:12.5, color:"#1A0A3D", lineHeight:1.7 }}>{d.desc}</p>
+                  <div>
+                    <div style={{ fontSize:11, fontWeight:700, color:"#1A0A3D", marginBottom:4 }}>Indicador:</div>
+                    <p style={{ margin:0, fontSize:12, color:"#9080B8", lineHeight:1.65 }}>{d.indicador}</p>
                   </div>
-                )}
+                  <div style={{ background:"#F4F2FC", borderRadius:8, padding:"10px 12px", border:"1px solid #EDE6FA" }}>
+                    <div style={{ fontSize:11, fontWeight:700, color:"#9080B8", marginBottom:5, textTransform:"uppercase", letterSpacing:"0.5px" }}>Campos relacionados</div>
+                    {d.campos.map((c,i) => <div key={i} style={{ fontSize:12, color:"#1A0A3D", lineHeight:1.6 }}>{c}</div>)}
+                  </div>
+                  <div style={{ marginTop:"auto", paddingTop:10, borderTop:"1px solid #EDE6FA" }}>
+                    <div style={{ fontSize:11, fontWeight:700, color:d.color, marginBottom:4 }}>Pregunta orientadora</div>
+                    <p style={{ margin:0, fontSize:12, color:"#9080B8", lineHeight:1.6, fontStyle:"italic" }}>{d.pregunta}</p>
+                  </div>
+                </div>
               </div>
             ))}
+
           </div>
 
-          {/* Diagrama de cruce */}
-          <div style={{ marginTop:32, background:P.white, borderRadius:14, padding:"24px 28px", border:`1px solid ${P.tint}` }}>
-            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:16 }}>
-              Matriz de articulación — Líneas × Áreas
+          {/* ── TRANSVERSAL ── */}
+          <div style={{ borderRadius:14, overflow:"hidden", border:"1px solid #C8E6C9", marginBottom:32 }}>
+            <div style={{ background:"#C8E6C9", padding:"13px 24px" }}>
+              <span style={{ fontSize:12, fontWeight:700, color:"#1B5E20", textTransform:"uppercase", letterSpacing:"0.8px" }}>
+                TRANSVERSAL:&nbsp;&nbsp;Impacto en la Gestión Pública y Normativa
+              </span>
             </div>
-            <div style={{ overflowX:"auto" }}>
-              <table className="arq-matrix-tbl" style={{ borderCollapse:"collapse", width:"100%" }}>
-                <thead>
-                  <tr style={{ background:P.ink }}>
-                    <th style={{ padding:"10px 14px", textAlign:"left", fontSize:11, fontWeight:600, color:"rgba(255,255,255,0.6)", letterSpacing:"0.5px", minWidth:160 }}>
-                      Línea transversal
-                    </th>
-                    {AREAS.map(a => (
-                      <th key={a.id} style={{ padding:"10px 10px", textAlign:"center", fontSize:10, fontWeight:700, color:"rgba(255,255,255,0.75)", minWidth:90 }}>
-                        {a.nombre.split(" ").slice(0,2).join(" ")}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {LINEAS.map(l => (
-                    <tr key={l.id} style={{ borderBottom:`1px solid ${P.tint}` }}>
-                      <td style={{ padding:"10px 14px", fontSize:12.5, color:P.ink, fontWeight:600, lineHeight:1.3 }}>{l.id}. {l.nombre}</td>
-                      {AREAS.map(a => (
-                        <td key={a.id} style={{ padding:"10px", textAlign:"center" }}>
-                          <span style={{ width:12, height:12, borderRadius:"50%", background:a.color, display:"inline-block", opacity:0.75 }}/>
-                        </td>
-                      ))}
-                    </tr>
+            <div style={{ background:"#FFF", padding:"22px 24px 24px" }}>
+              <p style={{ margin:"0 0 20px", fontSize:13, color:"#1A0A3D", lineHeight:1.75 }}>
+                La investigación produce conocimiento que se traduce en instrumentos de política pública, marcos normativos o decisiones de gestión. No es el nivel más alto de impacto: es una dimensión que puede articularse con cualquiera de las cuatro dimensiones sociales según el alcance del proyecto.
+              </p>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }} className="dim-grid">
+                <div>
+                  <div style={{ fontSize:11.5, fontWeight:700, color:"#1A0A3D", marginBottom:6 }}>Indicador de producto:</div>
+                  <p style={{ margin:0, fontSize:13, color:"#9080B8", lineHeight:1.7 }}>
+                    número de policy briefs, hojas de ruta, marcos normativos o instrumentos de planeación derivados directamente de resultados de investigación, con evidencia de uso institucional.
+                  </p>
+                </div>
+                <div>
+                  <div style={{ fontSize:11.5, fontWeight:700, color:"#1A0A3D", marginBottom:8 }}>Campos relacionados</div>
+                  {[{num:4,nombre:"Gestión masiva de información"},{num:5,nombre:"Estudios de públicos y acceso cultural"},{num:6,nombre:"Innovación pública y prospectiva"}].map(c => (
+                    <div key={c.num} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:7 }}>
+                      <span style={{ fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:13, color:"#9080B8", minWidth:52 }}>Campo {c.num}</span>
+                      <span style={{ width:1, height:14, background:"#D0C8E8", flexShrink:0 }}/>
+                      <span style={{ fontSize:13, color:"#1A0A3D" }}>{c.nombre}</span>
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* ── LÍNEAS TRANSVERSALES ── */}
+          <div>
+            <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:5 }}>Estructura cruzada · 5 líneas</div>
+            <h2 style={{ margin:"0 0 6px", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:"clamp(18px,2vw,28px)", color:P.ink, textTransform:"uppercase", lineHeight:1 }}>
+              Líneas Transversales de Investigación
+            </h2>
+            <p style={{ margin:"0 0 20px", fontSize:12.5, color:P.soft, lineHeight:1.6 }}>
+              Dimensiones analíticas que articulan horizontalmente las 6 áreas de investigación.
+            </p>
+            <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+              {LINEAS.map(l => (
+                <div key={l.id}
+                  onClick={() => setLineaActiva(lineaActiva===l.id ? null : l.id)}
+                  style={{ background:"#FFF", borderRadius:10, padding:"16px 20px", border:`1.5px solid ${lineaActiva===l.id ? P.mid : P.tint}`, cursor:"pointer", transition:"all 0.18s", boxShadow: lineaActiva===l.id ? `0 3px 14px ${P.mid}22` : "none" }}
+                >
+                  <div style={{ display:"flex", alignItems:"center", gap:14 }}>
+                    <div style={{ width:32, height:32, borderRadius:"50%", background: lineaActiva===l.id ? P.mid : P.tint, color: lineaActiva===l.id ? "#FFF" : P.mid, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Barlow Condensed',Impact,sans-serif", fontWeight:900, fontSize:16, flexShrink:0 }}>{l.id}</div>
+                    <div style={{ flex:1 }}>
+                      <span style={{ fontWeight:700, fontSize:13.5, color: lineaActiva===l.id ? P.ink : P.deep }}>{l.nombre}</span>
+                      {lineaActiva !== l.id && <span style={{ fontSize:12, color:P.soft, marginLeft:12 }}>{l.desc}</span>}
+                    </div>
+                    <span style={{ color:P.soft, fontSize:14, flexShrink:0 }}>{lineaActiva===l.id ? "▲" : "▼"}</span>
+                  </div>
+                  {lineaActiva===l.id && (
+                    <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${P.tint}`, animation:"fadeUp 0.2s ease both" }}>
+                      <p style={{ margin:"0 0 14px", fontSize:13, color:P.soft, lineHeight:1.65 }}>{l.desc}</p>
+                      <div style={{ fontSize:11, fontWeight:700, color:P.soft, textTransform:"uppercase", letterSpacing:"1px", marginBottom:10 }}>Cómo se expresa en cada área</div>
+                      <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:8 }}>
+                        {AREAS.map(a => (
+                          <div key={a.id} style={{ background:P.bg, borderRadius:8, padding:"10px 12px", borderLeft:`3px solid ${a.accent}` }}>
+                            <div style={{ fontSize:11, fontWeight:700, color:P.ink, marginBottom:2 }}>{a.nombre}</div>
+                            <div style={{ fontSize:11, color:P.soft, lineHeight:1.4 }}>
+                              {l.id==="A" && "Análisis del contexto histórico, político y socioeconómico del campo cultural correspondiente."}
+                              {l.id==="B" && "Mapeo y caracterización de actores, comunidades, redes e instituciones propias de cada área."}
+                              {l.id==="C" && "Estudio de los procesos de creación, circulación, consumo y apropiación específicos del área."}
+                              {l.id==="D" && "Evaluación de cambios generados por políticas e intervenciones en cada campo cultural."}
+                              {l.id==="E" && "Identificación de tendencias emergentes y escenarios futuros propios de cada área."}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       )}
 
